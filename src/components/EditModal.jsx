@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
-const EditModal = ({ submit, openModal, details }) => {
+const EditModal = ({ submit, openModal, details, selections }) => {
   const image = useRef("");
   const [url, SetUrl] = useState(details.image || "");
 
@@ -76,6 +76,20 @@ const EditModal = ({ submit, openModal, details }) => {
                   {...register(i)}
                   hidden
                 />
+              </>
+            ) : i == "category" ? (
+              <>
+                <label class="text-gray-800 text-sm font-bold leading-tight tracking-normal">
+                  {i}:
+                </label>
+                <select
+                  {...register(i)}
+                  class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                >
+                  {selections.map((o) => (
+                    <option value={o._id}>{o.name}</option>
+                  ))}
+                </select>
               </>
             ) : (
               <>

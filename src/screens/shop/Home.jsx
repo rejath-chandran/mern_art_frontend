@@ -15,9 +15,9 @@ import { AllCategory } from "../../services/AdminQry";
 //   }
 // ];
 const Home = () => {
-  let category=AllCategory()
-  let products=category.data||[]
-  console.log("ddd",products)
+  let category = AllCategory();
+  let products = category.data || [];
+  console.log("ddd", products);
   return (
     <main>
       <div className="bg-white">
@@ -48,7 +48,6 @@ const Home = () => {
                 <Link to={`category/${product.name}`}>
                   <img
                     src={product.image}
-                
                     className="h-full w-full object-cover object-center group-hover:opacity-75"
                   />
                 </Link>

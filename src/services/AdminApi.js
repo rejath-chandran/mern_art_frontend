@@ -29,5 +29,3 @@ export const PostRegister = async (data) => {
 export const PostUserLogin = async (data) => {
   return await axioInstance.post("api/login", data, { headers });
 };
-
-
