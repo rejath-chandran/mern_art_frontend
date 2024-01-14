@@ -5,6 +5,8 @@ import {
   PostCategory,
   PutCategory,
   DeleteCategory,
+  PostRegister,
+  PostUserLogin,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -36,5 +38,22 @@ export function RemoveCategory(client) {
     onSuccess: () => {
       client.invalidateQueries({ queryKey: ["all-category"] });
     },
+  });
+}
+
+//Register
+export function RegisterUser(notify) {
+  return useMutation({
+    mutationFn: (data) => PostRegister(data),
+    onError: () => notify(),
+  });
+}
+export function LoginUser(setLogin, notify) {
+  return useMutation({
+    mutationFn: (data) => PostUserLogin(data),
+    onSuccess: (res) => {
+      setLogin("customer", res.data.Token);
+    },
+    onError: () => notify(),
   });
 }

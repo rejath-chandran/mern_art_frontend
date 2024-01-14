@@ -6,7 +6,7 @@ let menu = [
   { name: "USERS", path: "users" },
   { name: "CATEGORY", path: "category" },
   { name: "WALLET", path: "users" },
-  { name: "PRODUCTS", path: "users" },
+  { name: "PRODUCTS", path: "products" },
 ];
 
 const AdminLayout = () => {

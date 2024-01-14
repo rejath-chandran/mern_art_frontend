@@ -21,3 +21,13 @@ export const PutCategory = async (data) => {
 export const DeleteCategory = async (data) => {
   return await axioInstance.delete(`api/category/${data}`);
 };
+
+//auth
+export const PostRegister = async (data) => {
+  return await axioInstance.post("api/register", data, { headers });
+};
+export const PostUserLogin = async (data) => {
+  return await axioInstance.post("api/login", data, { headers });
+};
+
+

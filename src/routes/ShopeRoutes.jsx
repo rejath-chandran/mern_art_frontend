@@ -11,29 +11,32 @@ import AccountLayout from "../screens/shop/AccountLayout";
 import UserWallet from "../screens/shop/UserWallet";
 import UserProfile from "../screens/shop/UserProfile";
 import Register from "../screens/shop/Register";
-
+import { ToastContainer } from "react-toastify";
 const ShopeRoutes = () => {
   return (
-    <Routes>
-      {/* <Route path='/login'element={<Login/>}/> */}
+    <>
+      <ToastContainer />
+      <Routes>
+        {/* <Route path='/login'element={<Login/>}/> */}
 
-      <Route path="/admin/*" element={<AdminLogin />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
+        <Route path="/admin/*" element={<AdminLogin />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
 
-      <Route path="/" element={<ShopLayout />}>
-        <Route index element={<Home />} />
-        <Route path="category/:value" element={<Category />} />
-        <Route path="item/:id" element={<Products />} />
-        <Route path="auction" element={<Products />} />
-        <Route path="auction/:id" element={<Products />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="account" element={<AccountLayout />}>
-          <Route index element={<UserProfile />} />
-          <Route path="wallet" element={<UserWallet />} />
+        <Route path="/" element={<ShopLayout />}>
+          <Route index element={<Home />} />
+          <Route path="category/:value" element={<Category />} />
+          <Route path="item/:id" element={<Products />} />
+          <Route path="auction" element={<Products />} />
+          <Route path="auction/:id" element={<Products />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="account" element={<AccountLayout />}>
+            <Route index element={<UserProfile />} />
+            <Route path="wallet" element={<UserWallet />} />
+          </Route>
         </Route>
-      </Route>
-    </Routes>
+      </Routes>
+    </>
   );
 };
 

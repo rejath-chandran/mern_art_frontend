@@ -10,7 +10,7 @@ const CommonRegister = ({
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full p-6 bg-white rounded-md shadow-md">
-        <h2 className="text-3xl font-bold text-center mb-6">Login</h2>
+        <h2 className="text-3xl font-bold text-center mb-6">Register</h2>
         <form onSubmit={handleRegister}>
           <div className="mb-4">
             <label

@@ -10,6 +10,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+import { useLoggedInStore } from "../../store";
+
 const currencies = ["INR"];
 const navigation = {
   categories: [],
@@ -21,6 +23,8 @@ function classNames(...classes) {
 }
 
 const ShopLayout = () => {
+  let isLoggedin = useLoggedInStore((state) => state.loggedIn);
+  let logout = useLoggedInStore((state) => state.logout);
   return (
     <>
       <header className="relative">
@@ -53,21 +57,41 @@ const ShopLayout = () => {
                   </div>
                 </div>
               </form>
-
-              <div className="flex items-center space-x-6">
-                <a
-                  href="#"
-                  className="text-sm font-medium text-white hover:text-gray-100"
-                >
-                  Sign in
-                </a>
-                <a
-                  href="#"
-                  className="text-sm font-medium text-white hover:text-gray-100"
-                >
-                  Create an account
-                </a>
-              </div>
+              {isLoggedin ? (
+                <>
+                  <div className="flex items-center space-x-6">
+                    <Link
+                      to={"/account"}
+                      className="text-sm font-medium text-white hover:text-gray-100"
+                    >
+                      My Account
+                    </Link>
+                    <Link
+                      onClick={() => logout()}
+                      className="text-sm font-medium text-white hover:text-gray-100"
+                    >
+                      Logout
+                    </Link>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-center space-x-6">
+                    <Link
+                      to={"/login"}
+                      className="text-sm font-medium text-white hover:text-gray-100"
+                    >
+                      Sign in
+                    </Link>
+                    <Link
+                      to={"/register"}
+                      className="text-sm font-medium text-white hover:text-gray-100"
+                    >
+                      Create an account
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 

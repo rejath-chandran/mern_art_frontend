@@ -1,6 +1,6 @@
 import React from "react";
 
-const Login = ({
+const CommonLogin = ({
   name,
   email,
   setEmail,
@@ -56,4 +56,4 @@ const Login = ({
   );
 };
 
-export default Login;
+export default CommonLogin;
