@@ -12,14 +12,14 @@ import UserWallet from "../screens/shop/UserWallet";
 import UserProfile from "../screens/shop/UserProfile";
 import Register from "../screens/shop/Register";
 import { ToastContainer } from "react-toastify";
+import SellerLogin from "../screens/seller/SellerLogin";
 const ShopeRoutes = () => {
   return (
     <>
       <ToastContainer />
       <Routes>
-        {/* <Route path='/login'element={<Login/>}/> */}
-
         <Route path="/admin/*" element={<AdminLogin />} />
+        <Route path="/seller/*" element={<SellerLogin/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 

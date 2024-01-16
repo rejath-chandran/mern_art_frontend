@@ -1,4 +1,5 @@
 import { AdminRoutes } from "./routes/AdminRoutes";
+import { SellerRoutes } from "./routes/SellerRoutes";
 import ShopeRoutes from "./routes/ShopeRoutes";
 import { useLoggedInStore } from "./store";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
@@ -8,7 +9,10 @@ const Render = () => {
   console.log("type", role);
   if (role === "admin") {
     return <AdminRoutes />;
-  } else {
+  } else if(role==="seller"){
+     return <SellerRoutes/>
+  }
+  else {
     return <ShopeRoutes />;
   }
 };

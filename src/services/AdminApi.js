@@ -1,15 +1,18 @@
 import axios from "axios";
 import { BASE_URL } from "../config/config";
 
+const Token=localStorage.getItem('user_token')||""
+
 const headers = {
   "Content-Type": "application/json",
+  "Authorization":`Bearer ${Token}`,
 };
 
 const axioInstance = axios.create({ baseURL: BASE_URL });
 
 //category
 export const GetAllCategory = async () => {
-  let data = (await axioInstance.get("api/category")).data;
+  let data = (await axioInstance.get("api/category",{headers})).data;
   return data;
 };
 export const PostCategory = async (data) => {
