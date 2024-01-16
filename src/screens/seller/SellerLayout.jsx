@@ -12,7 +12,7 @@ let menu = [
 const AdminLayout = () => {
   return (
     <div className="flex">
-      <Sidebar menu={menu} name={'Seller'}/>
+      <Sidebar menu={menu} name={"Seller"} />
       <div className="grow">
         <ToastContainer />
         <Outlet />

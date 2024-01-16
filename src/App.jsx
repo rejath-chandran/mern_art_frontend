@@ -9,10 +9,9 @@ const Render = () => {
   console.log("type", role);
   if (role === "admin") {
     return <AdminRoutes />;
-  } else if(role==="seller"){
-     return <SellerRoutes/>
-  }
-  else {
+  } else if (role === "seller") {
+    return <SellerRoutes />;
+  } else {
     return <ShopeRoutes />;
   }
 };

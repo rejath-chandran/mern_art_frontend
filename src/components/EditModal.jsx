@@ -37,7 +37,7 @@ const EditModal = ({ submit, openModal, details, selections }) => {
           <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">
             Details
           </h1>
-          {Object.keys(details).map((i) =>
+          {Object.keys(details)?.map((i) =>
             i == "image" ? (
               <>
                 <label class="text-gray-800 text-sm font-bold leading-tight tracking-normal">
@@ -86,9 +86,17 @@ const EditModal = ({ submit, openModal, details, selections }) => {
                   {...register(i)}
                   class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
                 >
-                  {selections.map((o) => (
-                    <option value={o._id}>{o.name}</option>
-                  ))}
+                  {selections?.map((o) => {
+                    if (o.name == details[i]) {
+                      return (
+                        <option value={o._id} selected>
+                          {o.name}
+                        </option>
+                      );
+                    } else {
+                      return <option value={o._id}>{o.name}</option>;
+                    }
+                  })}
                 </select>
               </>
             ) : (

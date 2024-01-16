@@ -6,9 +6,10 @@ import { toast } from "react-toastify";
 
 import {
   AllCategory,
-  CreateCategory,
-  UpdateCategory,
-  RemoveCategory,
+  AllProduct,
+  CreateProduct,
+  RemoveProduct,
+  UpdateProduct,
 } from "../../services/AdminQry.js";
 
 import { useQueryClient } from "@tanstack/react-query";
@@ -16,12 +17,12 @@ import { useQueryClient } from "@tanstack/react-query";
 const SellerProduct = () => {
   const client = useQueryClient();
   const [modal, openModal] = useState(false);
+  const cat_data = AllCategory();
 
-  const { isLoading, error, data } = AllCategory();
-
-  const create = CreateCategory(client);
-  const update = UpdateCategory(client);
-  const remove = RemoveCategory(client);
+  const { isLoading, error, data } = AllProduct();
+  const create = CreateProduct(client);
+  const update = UpdateProduct(client);
+  const remove = RemoveProduct(client);
 
   function EditSubmit(data) {
     update.mutate(JSON.stringify(data));
@@ -30,21 +31,23 @@ const SellerProduct = () => {
 
   function CreateSubmit(data) {
     console.log(data);
-    // create.mutate(JSON.stringify(data));
+    create.mutate(JSON.stringify(data));
     toast.success("created");
   }
 
   function DeleteSubmit(id) {
-    deletecategory.mutate(id);
+    remove.mutate(id);
     toast.error("Deleted");
   }
 
   const FormValues = {
-    image: "",
     name: "",
+    image: "",
     desc: "",
     category: " ",
+    price: " ",
   };
+  const heads = ["image", "name", "category", "artist", "desc", "action"];
 
   return (
     <div className=" bg-white h-[100%] p-6 relative">
@@ -53,7 +56,13 @@ const SellerProduct = () => {
         <>loading</>
       ) : (
         <>
-          <Table submit={EditSubmit} Delete={DeleteSubmit} data={data} />
+          <Table
+            submit={EditSubmit}
+            Delete={DeleteSubmit}
+            data={data}
+            heads={heads}
+            selection={cat_data.data}
+          />
         </>
       )}
       {error && <>something went wrong</>}
@@ -62,14 +71,11 @@ const SellerProduct = () => {
           submit={CreateSubmit}
           details={FormValues}
           openModal={openModal}
-          selections={data}
+          selections={cat_data.data}
         />
       ) : null}
     </div>
   );
 };
 
-
-
-
-export default SellerProduct
+export default SellerProduct;

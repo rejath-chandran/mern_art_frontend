@@ -2,12 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLoggedInStore } from "../store";
 
-const Sidebar = ({ menu,name }) => {
+const Sidebar = ({ menu, name }) => {
   const Logout = useLoggedInStore((state) => state.logout);
 
   return (
     <div className="bg-gray-800 text-white h-screen w-64 p-4">
-      <div className="text-2xl font-bold mb-4">{name?name:"Admin"} Dashboard</div>
+      <div className="text-2xl font-bold mb-4">
+        {name ? name : "Admin"} Dashboard
+      </div>
       <ul>
         {menu.map((e) => (
           <li className="mb-2 mt-6 ">

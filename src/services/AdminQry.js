@@ -7,6 +7,11 @@ import {
   DeleteCategory,
   PostRegister,
   PostUserLogin,
+  PostProduct,
+  GetAllProduct,
+  PutProduct,
+  DeleteProduct,
+  GetAllProductByCategory,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -52,8 +57,56 @@ export function LoginUser(setLogin, notify) {
   return useMutation({
     mutationFn: (data) => PostUserLogin(data),
     onSuccess: (res) => {
-      setLogin("customer", res.data.Token);
+      setLogin(res.data.type, res.data.Token);
     },
-    onError: () => notify(),
+    onError: () => {
+      notify();
+    },
   });
 }
+
+//PRoduct
+
+export function CreateProduct(client) {
+  return useMutation({
+    mutationFn: (data) => PostProduct(data),
+    onSuccess: (res) => {
+      client.invalidateQueries({ queryKey: ["all-product"] })
+    },
+    onError: () => {},
+  });
+}
+
+export function AllProduct() {
+  return useQuery({
+    queryKey: ["all-product"],
+    queryFn: GetAllProduct,
+  });
+}
+export function AllProductByCategory(name) {
+  return useQuery({
+    queryKey: ["all-product-category",name],
+    queryFn:(name)=> GetAllProductByCategory(name),
+  });
+}
+
+export function UpdateProduct(client) {
+  return useMutation({
+    mutationFn: (data) => PutProduct(data),
+    onSuccess: (res) => {
+      client.invalidateQueries({ queryKey: ["all-product"] })
+    },
+    onError: () => {},
+  });
+}
+export function RemoveProduct(client) {
+  return useMutation({
+    mutationFn: (data) => DeleteProduct(data),
+    onSuccess: (res) => {
+      client.invalidateQueries({ queryKey: ["all-product"] })
+    },
+    onError: () => {},
+  });
+}
+
+//Auction

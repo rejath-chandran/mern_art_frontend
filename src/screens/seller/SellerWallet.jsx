@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const SellerWallet = () => {
-  return (
-    <div>SellerWallet</div>
-  )
-}
+  return <div>SellerWallet</div>;
+};
 
-export default SellerWallet
+export default SellerWallet;

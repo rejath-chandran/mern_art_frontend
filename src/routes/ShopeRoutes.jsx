@@ -19,7 +19,7 @@ const ShopeRoutes = () => {
       <ToastContainer />
       <Routes>
         <Route path="/admin/*" element={<AdminLogin />} />
-        <Route path="/seller/*" element={<SellerLogin/>} />
+        <Route path="/seller/*" element={<SellerLogin />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 

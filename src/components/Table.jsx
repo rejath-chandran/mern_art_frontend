@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import EditModal from "./EditModal";
 
-const Table = ({ submit, data, Delete }) => {
+const Table = ({ submit, data, Delete, heads, selection }) => {
   const ValueRef = useRef({});
-  const headings = ["image", "name", "desc", "action"];
+  const headings = heads || ["image", "name", "desc", "action"];
 
   const rows = data;
 
@@ -87,6 +87,7 @@ const Table = ({ submit, data, Delete }) => {
           submit={submit}
           details={ValueRef.current}
           openModal={openModal}
+          selections={selection}
         />
       ) : null}
     </div>

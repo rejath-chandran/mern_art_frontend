@@ -7,14 +7,14 @@ import SellerWallet from "../screens/seller/SellerWallet";
 import SellerOrder from "../screens/seller/SellerOrder";
 
 export const SellerRoutes = () => {
-    return (
-      <Routes>
-        <Route path="/seller" element={<SellerLayout/>}>
-          <Route index  element={<SellerProduct/>} />
-          <Route path="auction"  element={<SellerAuction/>} />
-          <Route path="wallet"  element={<SellerWallet/>} />
-          <Route path="orders"  element={<SellerOrder/>} />
-        </Route>
-      </Routes>
-    );
-  };
+  return (
+    <Routes>
+      <Route path="/seller" element={<SellerLayout />}>
+        <Route index element={<SellerProduct />} />
+        <Route path="auction" element={<SellerAuction />} />
+        <Route path="wallet" element={<SellerWallet />} />
+        <Route path="orders" element={<SellerOrder />} />
+      </Route>
+    </Routes>
+  );
+};

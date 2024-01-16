@@ -1,53 +1,25 @@
 import React from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-const products = [
-  {
-    id: 1,
-    name: "Product 1",
-    description: "Description for Product 1",
-    price: 50,
-    image: "https://placekitten.com/300/200", // replace with your image URL
-  },
-  {
-    id: 1,
-    name: "Product 1",
-    description: "Description for Product 1",
-    price: 50,
-    image: "https://placekitten.com/300/200", // replace with your image URL
-  },
-  {
-    id: 1,
-    name: "Product 1",
-    description: "Description for Product 1",
-    price: 50,
-    image: "https://placekitten.com/300/200", // replace with your image URL
-  },
-  {
-    id: 1,
-    name: "Product 1",
-    description: "Description for Product 1",
-    price: 50,
-    image: "https://placekitten.com/300/200", // replace with your image URL
-  },
-  {
-    id: 1,
-    name: "Product 1",
-    description: "Description for Product 1",
-    price: 50,
-    image: "https://placekitten.com/300/200", // replace with your image URL
-  },
-  {
-    id: 1,
-    name: "Product 1",
-    description: "Description for Product 1",
-    price: 50,
-    image: "https://placekitten.com/300/200", // replace with your image URL
-  },
-];
+import { GetAllProductByCategory } from "../../services/AdminApi";
+import { AllProductByCategory } from "../../services/AdminQry";
+
+// const products = [
+//   {
+//     id: 1,
+//     name: "Product 1",
+//     price: 50,
+//     image: "https://placekitten.com/300/200", // replace with your image URL
+//   },
+ 
+// ];
 
 const Category = () => {
   const { value } = useParams();
+
+  const AllProduct=AllProductByCategory(value)
+  console.log(AllProduct.data)
+  let products=AllProduct.data||[]
   return (
     <>
       <div className="text-xl ml-12 pl-12 mt-6">
@@ -67,16 +39,16 @@ const ProductCard = ({ product }) => {
     <div className="bg-white p-4 shadow-md rounded-md">
       <img
         src={product.image}
-        alt={product.name}
+        
         className="w-full h-32 object-cover mb-4"
       />
       <h2 className="text-lg font-semibold mb-2">{product.name}</h2>
       <p className="text-gray-600 mb-4">
-        <span className="text-red-300">Artist: </span>rejath
+        <span className="text-red-300">Artist: </span>{product.artist}
       </p>
       <div className="flex justify-between items-center">
         <span className="text-lg font-bold text-gray-600">
-          ₹{product.price}
+          ₹{product?.price}
         </span>
         <Link
           className="bg-gray-800 text-white px-4 py-2 rounded-md"

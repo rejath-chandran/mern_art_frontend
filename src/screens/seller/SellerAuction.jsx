@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const SellerAuction = () => {
-  return (
-    <div>SellerAuction</div>
-  )
-}
+  return <div>SellerAuction</div>;
+};
 
-export default SellerAuction
+export default SellerAuction;
