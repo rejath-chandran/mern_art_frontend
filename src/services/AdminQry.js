@@ -14,6 +14,9 @@ import {
   GetAllProductByCategory,
   PostAuction,
   GetAllAuction,
+  GetAuctionByID,
+  PostBid,
+  GetBidByID,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -118,6 +121,12 @@ export function AllAuction() {
     queryFn: GetAllAuction,
   });
 }
+export function AuctionByID(id) {
+  return useQuery({
+    queryKey: ["auction-id", id],
+    queryFn: GetAuctionByID,
+  });
+}
 export function CreateAuction(client) {
   return useMutation({
     mutationFn: (data) => PostAuction(data),
@@ -134,5 +143,22 @@ export function UpdateAuction(client) {
       // client.invalidateQueries({ queryKey: ["all-product"] })
     },
     onError: () => {},
+  });
+}
+//Bid
+
+export function CreateBid(client) {
+  return useMutation({
+    mutationFn: (data) => PostBid(data),
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ["auction-id"] });
+      client.invalidateQueries({ queryKey: ["bid-id"] });
+    },
+  });
+}
+export function BidByID(id) {
+  return useQuery({
+    queryKey: ["bid-id", id],
+    queryFn: GetBidByID,
   });
 }

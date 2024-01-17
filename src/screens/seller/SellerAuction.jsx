@@ -40,7 +40,7 @@ const SellerAuction = () => {
 
   function DeleteSubmit(id) {
     // remove.mutate(id);
-    console.log(id)
+    console.log(id);
     toast.error("ended auction");
   }
 
@@ -64,7 +64,7 @@ const SellerAuction = () => {
   ];
   return (
     <div className=" bg-white h-[100%] p-6 relative">
-      <Header name={"Add Auctions"} openModal={openModal} />
+      <Header name={"Add Auctions"} openModal={openModal} type={"auction"} />
       {isLoading ? (
         <>loading</>
       ) : (

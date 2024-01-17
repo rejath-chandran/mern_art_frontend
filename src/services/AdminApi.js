@@ -60,6 +60,12 @@ export const GetAllAuction = async () => {
   let data = (await axioInstance.get("api/auction", { headers })).data;
   return data;
 };
+export const GetAuctionByID = async (key) => {
+  let id = key.queryKey[1];
+  let data = (await axioInstance.get(`api/auction/item/${id}`, { headers }))
+    .data;
+  return data;
+};
 export const PostAuction = async (data) => {
   return await axioInstance.post("api/auction", data, { headers });
 };
@@ -68,4 +74,14 @@ export const PutAuction = async (data) => {
 };
 export const DeleteAuction = async (data) => {
   return await axioInstance.delete(`api/auction/${data}`);
+};
+
+//Bid
+export const PostBid = async (data) => {
+  return await axioInstance.post("api/bid", data, { headers });
+};
+export const GetBidByID = async (key) => {
+  let id = key.queryKey[1];
+  let data = (await axioInstance.get(`api/bid/${id}`, { headers })).data;
+  return data;
 };

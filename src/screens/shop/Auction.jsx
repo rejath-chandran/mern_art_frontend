@@ -1,28 +1,12 @@
-import React from "react";
-import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { AllProductByCategory } from "../../services/AdminQry";
+import { AllAuction } from "../../services/AdminQry";
 
-// const products = [
-//   {
-//     id: 1,
-//     name: "Product 1",
-//     price: 50,
-//     image: "https://placekitten.com/300/200", // replace with your image URL
-//   },
-
-// ];
-
-const Category = () => {
-  const { value } = useParams();
-
-  const AllProduct = AllProductByCategory(value);
+const Auction = () => {
+  const AllProduct = AllAuction();
   let products = AllProduct.data || [];
   return (
     <>
-      <div className="text-xl ml-12 pl-12 mt-6">
-        {value?.toUpperCase() ?? ""}
-      </div>
+      <div className="text-xl ml-12 pl-12 mt-6">LATEST AUCTIONS</div>
       <div className="m-12 container mx-auto grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
@@ -47,7 +31,7 @@ const ProductCard = ({ product }) => {
         </span>
         <Link
           className="bg-gray-800 text-white px-4 py-2 rounded-md"
-          to={"/item/123"}
+          to={`/auction/${product._id}`}
         >
           View
         </Link>
@@ -56,4 +40,4 @@ const ProductCard = ({ product }) => {
   );
 };
 
-export default Category;
+export default Auction;

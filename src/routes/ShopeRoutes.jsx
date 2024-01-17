@@ -13,6 +13,8 @@ import UserProfile from "../screens/shop/UserProfile";
 import Register from "../screens/shop/Register";
 import { ToastContainer } from "react-toastify";
 import SellerLogin from "../screens/seller/SellerLogin";
+import Auction from "../screens/shop/Auction";
+import AuctionItem from "../screens/shop/AuctionItem";
 const ShopeRoutes = () => {
   return (
     <>
@@ -27,8 +29,8 @@ const ShopeRoutes = () => {
           <Route index element={<Home />} />
           <Route path="category/:value" element={<Category />} />
           <Route path="item/:id" element={<Products />} />
-          <Route path="auction" element={<Products />} />
-          <Route path="auction/:id" element={<Products />} />
+          <Route path="auction" element={<Auction />} />
+          <Route path="auction/:id" element={<AuctionItem />} />
           <Route path="cart" element={<Cart />} />
           <Route path="account" element={<AccountLayout />}>
             <Route index element={<UserProfile />} />
