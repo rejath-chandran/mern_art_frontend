@@ -47,7 +47,15 @@ const SellerProduct = () => {
     category: " ",
     price: " ",
   };
-  const heads = ["image", "name", "category", "artist", "desc", "action"];
+  const heads = [
+    "image",
+    "name",
+    "category",
+    "artist",
+    "price",
+    "desc",
+    "action",
+  ];
 
   return (
     <div className=" bg-white h-[100%] p-6 relative">

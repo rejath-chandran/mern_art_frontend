@@ -11,15 +11,15 @@ import { AllProductByCategory } from "../../services/AdminQry";
 //     price: 50,
 //     image: "https://placekitten.com/300/200", // replace with your image URL
 //   },
- 
+
 // ];
 
 const Category = () => {
   const { value } = useParams();
 
-  const AllProduct=AllProductByCategory(value)
-  console.log(AllProduct.data)
-  let products=AllProduct.data||[]
+  const AllProduct = AllProductByCategory(value);
+  console.log(AllProduct.data);
+  let products = AllProduct.data || [];
   return (
     <>
       <div className="text-xl ml-12 pl-12 mt-6">
@@ -37,14 +37,11 @@ const Category = () => {
 const ProductCard = ({ product }) => {
   return (
     <div className="bg-white p-4 shadow-md rounded-md">
-      <img
-        src={product.image}
-        
-        className="w-full h-32 object-cover mb-4"
-      />
+      <img src={product.image} className="w-full h-32 object-cover mb-4" />
       <h2 className="text-lg font-semibold mb-2">{product.name}</h2>
       <p className="text-gray-600 mb-4">
-        <span className="text-red-300">Artist: </span>{product.artist}
+        <span className="text-red-300">Artist: </span>
+        {product.artist}
       </p>
       <div className="flex justify-between items-center">
         <span className="text-lg font-bold text-gray-600">

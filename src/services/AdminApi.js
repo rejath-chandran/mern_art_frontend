@@ -39,8 +39,10 @@ export const GetAllProduct = async () => {
   return data;
 };
 export const GetAllProductByCategory = async (name) => {
-  let category=name.queryKey[1]
-  let data = (await axioInstance.get(`api/product/category/${category}`, { headers })).data;
+  let category = name.queryKey[1];
+  let data = (
+    await axioInstance.get(`api/product/category/${category}`, { headers })
+  ).data;
   return data;
 };
 export const PostProduct = async (data) => {
@@ -50,20 +52,20 @@ export const PutProduct = async (data) => {
   return await axioInstance.put("api/product", data, { headers });
 };
 export const DeleteProduct = async (data) => {
-  return await axioInstance.delete(`api/product/${data}`,{headers});
+  return await axioInstance.delete(`api/product/${data}`, { headers });
 };
 
 //Auction
 export const GetAllAuction = async () => {
-  let data = (await axioInstance.get("api/category", { headers })).data;
+  let data = (await axioInstance.get("api/auction", { headers })).data;
   return data;
 };
 export const PostAuction = async (data) => {
-  return await axioInstance.post("api/category", data, { headers });
+  return await axioInstance.post("api/auction", data, { headers });
 };
 export const PutAuction = async (data) => {
-  return await axioInstance.put("api/category", data, { headers });
+  return await axioInstance.put("api/auction", data, { headers });
 };
 export const DeleteAuction = async (data) => {
-  return await axioInstance.delete(`api/category/${data}`);
+  return await axioInstance.delete(`api/auction/${data}`);
 };
