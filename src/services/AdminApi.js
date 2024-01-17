@@ -38,6 +38,11 @@ export const GetAllProduct = async () => {
   let data = (await axioInstance.get("api/product", { headers })).data;
   return data;
 };
+export const GetProductbyId = async (key) => {
+  let id = key.queryKey[1];
+  let data = (await axioInstance.get(`api/product/${id}`, { headers })).data;
+  return data;
+};
 export const GetAllProductByCategory = async (name) => {
   let category = name.queryKey[1];
   let data = (

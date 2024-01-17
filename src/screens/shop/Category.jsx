@@ -47,7 +47,7 @@ const ProductCard = ({ product }) => {
         </span>
         <Link
           className="bg-gray-800 text-white px-4 py-2 rounded-md"
-          to={"/item/123"}
+          to={`/item/${product._id}`}
         >
           View
         </Link>

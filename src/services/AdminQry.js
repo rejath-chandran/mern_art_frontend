@@ -17,6 +17,7 @@ import {
   GetAuctionByID,
   PostBid,
   GetBidByID,
+  GetProductbyId,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -86,6 +87,12 @@ export function AllProduct() {
   return useQuery({
     queryKey: ["all-product"],
     queryFn: GetAllProduct,
+  });
+}
+export function ProductByid(id) {
+  return useQuery({
+    queryKey: ["product-id",id],
+    queryFn: GetProductbyId,
   });
 }
 export function AllProductByCategory(name) {
