@@ -10,7 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
-import { useLoggedInStore } from "../../store";
+import { CartStore, useLoggedInStore } from "../../store";
 
 const currencies = ["INR"];
 const navigation = {
@@ -25,6 +25,7 @@ function classNames(...classes) {
 const ShopLayout = () => {
   let isLoggedin = useLoggedInStore((state) => state.loggedIn);
   let logout = useLoggedInStore((state) => state.logout);
+  let { CartCount } = CartStore();
   return (
     <>
       <header className="relative">
@@ -160,7 +161,7 @@ const ShopLayout = () => {
                           aria-hidden="true"
                         />
                         <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                          1
+                          {CartCount}
                         </span>
                         <span className="sr-only">items in cart, view bag</span>
                       </Link>

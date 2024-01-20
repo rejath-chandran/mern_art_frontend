@@ -9,7 +9,7 @@ import { Navigate } from "react-router-dom";
 export const SellerRoutes = () => {
   return (
     <Routes>
-      <Route path="*" element={<Navigate to="/seller"/>} />
+      <Route path="*" element={<Navigate to="/seller" />} />
       <Route path="/seller" element={<SellerLayout />}>
         <Route index element={<SellerProduct />} />
         <Route path="auction" element={<SellerAuction />} />

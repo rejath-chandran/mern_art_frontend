@@ -91,7 +91,7 @@ export function AllProduct() {
 }
 export function ProductByid(id) {
   return useQuery({
-    queryKey: ["product-id",id],
+    queryKey: ["product-id", id],
     queryFn: GetProductbyId,
   });
 }

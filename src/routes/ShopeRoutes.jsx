@@ -15,16 +15,17 @@ import { ToastContainer } from "react-toastify";
 import SellerLogin from "../screens/seller/SellerLogin";
 import Auction from "../screens/shop/Auction";
 import AuctionItem from "../screens/shop/AuctionItem";
+import { Navigate } from "react-router-dom";
 const ShopeRoutes = () => {
   return (
     <>
       <ToastContainer />
       <Routes>
+        <Route path="*" element={<Navigate to="/" />} />
         <Route path="/admin/*" element={<AdminLogin />} />
         <Route path="/seller/*" element={<SellerLogin />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-
         <Route path="/" element={<ShopLayout />}>
           <Route index element={<Home />} />
           <Route path="category/:value" element={<Category />} />
