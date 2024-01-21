@@ -18,7 +18,7 @@ const AccountLayout = () => {
             </div>
           </Link>
 
-          <Link to={"/account/wallet"}>
+          <Link to={"/account/orders"}>
             <div>
               <div
                 role="button"

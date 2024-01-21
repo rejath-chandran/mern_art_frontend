@@ -1,25 +1,33 @@
-import React from "react";
+import React, { useRef } from "react";
 import useRazorpay from "react-razorpay";
+import { WalletOrder } from "../../services/AdminApi";
+import { CreateWalletAmount, WalletB } from "../../services/AdminQry";
+import { useQueryClient } from "@tanstack/react-query";
 
 const UserWallet = () => {
+
+  const client = useQueryClient()
+ const wallet=CreateWalletAmount(client)
+ const Balance=WalletB()
+  const AmountRef=useRef(0)
+
   const [Razorpay] = useRazorpay();
 
   const handlePayment = async (params) => {
-    // const order = await createOrder(params)
-
+    const res=await WalletOrder(AmountRef.current)
     const options = {
       key: "rzp_test_1Ez7RpNLZ42xoT",
-      amount: "10000",
+      amount: res.amount,
       currency: "INR",
       name: "Art Galleria",
       description: "wallet payment",
       image: "https://d1s2w0upia4e9w.cloudfront.net/images/favicon.ico",
-      order_id: "order_NQaCIM0cVIq9P4",
+      order_id: res.id,
       handler: function (response) {
-        console.log(response);
-        alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature);
+        let data={
+        "amount":res.amount
+        }
+          wallet.mutate(data)
       },
       notes: {
         address: "Galleria India",
@@ -37,11 +45,17 @@ const UserWallet = () => {
         <h2 className="text-xl font-semibold mb-4">Wallet</h2>
 
         <div className="flex items-center mb-4">
+          <label className="mr-2">Balance:</label>
+          <label
+            
+          >{Balance.isLoading?<>Loading...</>:<>{Balance.data.amount}</>}</label>
+        </div>
+
+        <div className="flex items-center mb-4">
           <label className="mr-2">Amount:</label>
           <input
             type="number"
-            // value={amount}
-            // onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) =>AmountRef.current=e.target.value}
             className="border p-2 rounded-md"
           />
         </div>

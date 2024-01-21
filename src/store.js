@@ -15,6 +15,26 @@ const geIntialUserType = () => {
   const userType = localStorage.getItem($LOCAL_USER_TYPE) || "customer";
   return userType;
 };
+
+
+// export const useLoggedInStore = create( persist((set,get)=>({
+//   loggedIn:false,
+//   userType:"customer",
+//   user_token:"",
+//   login: (usertype, token = null) =>set(()=>({
+//    loggedIn: true,
+//    userType: usertype,
+//    user_token:token
+//   })),
+//   logout: () =>set(() => ({
+//     loggedIn: false,
+//     userType: "customer",
+//     user_token:''
+//   }))
+
+// }),{name:"AuthStore"})) 
+
+
 export const useLoggedInStore = create((set) => ({
   loggedIn: getInitialLoggedIn(),
   userType: geIntialUserType(),
@@ -59,6 +79,7 @@ export const CartStore = create(
         let newcart = cart.filter((i) => i.id != id);
         set({ cart: newcart, CartCount: newcart.length });
       },
+      resetCart:()=>{set({cart:[],CartCount:0})}
     }),
     {
       name: "CartStorage",

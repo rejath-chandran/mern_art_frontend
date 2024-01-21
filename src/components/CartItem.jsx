@@ -1,4 +1,4 @@
-const CartItem = ({ item, onRemove }) => {
+const CartItem = ({ item, onRemove, Checkout }) => {
   return (
     <div className="flex items-center justify-between border-b border-gray-300 p-4">
       <img
@@ -7,16 +7,28 @@ const CartItem = ({ item, onRemove }) => {
       />
       <div>
         <h3 className="text-lg font-semibold">{item.name}</h3>
-        <p className="text-gray-600">{item.description}</p>
+        {Checkout ? (
+          <></>
+        ) : (
+          <>
+            <p className="text-gray-600">{item.description}</p>
+          </>
+        )}
       </div>
       <div className="flex items-center">
-        <span className="mr-4">₹{item.price}</span>
-        <button
-          onClick={() => onRemove(item.id)}
-          className="text-red-500 hover:text-red-700"
-        >
-          Remove
-        </button>
+        <span className="mr-4">₹ {item.price}</span>
+        {Checkout ? (
+          <></>
+        ) : (
+          <>
+            <button
+              onClick={() => onRemove(item.id)}
+              className="text-red-500 hover:text-red-700"
+            >
+              Remove
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

@@ -18,6 +18,10 @@ import {
   PostBid,
   GetBidByID,
   GetProductbyId,
+  PostOrder,
+  VerifyOrder,
+  WalletComplete,
+  Walletbalance,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -168,4 +172,56 @@ export function BidByID(id) {
     queryKey: ["bid-id", id],
     queryFn: GetBidByID,
   });
+}
+
+
+
+//order
+export function MakeOrder(Razorpay,navigate){
+  return useMutation({
+    mutationFn:(data)=>PostOrder(data),
+    onSuccess:(res)=>{
+
+      const options = {
+        key: "rzp_test_1Ez7RpNLZ42xoT",
+        amount:res.data.amount,
+        currency: "INR",
+        name: "Art Galleria",
+        description: "wallet payment",
+        image: "https://d1s2w0upia4e9w.cloudfront.net/images/favicon.ico",
+        order_id:res.data.order_id,
+        handler: function (response) {
+
+          let data={
+            order_id:response.razorpay_order_id
+          }
+          
+          VerifyOrder(data)
+          navigate("/")
+        },
+        notes: {
+          address: "Galleria India",
+        },
+        theme: {
+          color: "#000000",
+        },
+      };
+      const rzp1 = new Razorpay(options);
+      rzp1.open();
+    }
+  })
+}
+export function WalletB(id) {
+  return useQuery({
+    queryKey: ["shop-wallet-balance"],
+    queryFn: Walletbalance,
+  });
+}
+export function CreateWalletAmount(client) {
+  return useMutation({
+    onMutate:(data)=>WalletComplete(data),
+    onSuccess:()=>{
+      client.invalidateQueries({ queryKey: ["shop-wallet-balance"] })
+    }
+  })
 }
