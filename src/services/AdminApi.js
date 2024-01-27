@@ -116,7 +116,7 @@ export const WalletOrder=async(amount)=>{
   return (await axioInstance.get(`api/wallet/${amount}`,{headers})).data
 }
 export const WalletComplete=async(amount)=>{
-  return (await axioInstance.post(`api/wallet`,amount,{headers}))
+  return await axioInstance.post(`api/wallet`,amount,{headers})
 }
 export const Walletbalance=async()=>{
 

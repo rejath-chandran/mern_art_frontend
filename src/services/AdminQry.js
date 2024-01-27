@@ -211,17 +211,19 @@ export function MakeOrder(Razorpay,navigate){
     }
   })
 }
-export function WalletB(id) {
+export function WalletB() {
   return useQuery({
     queryKey: ["shop-wallet-balance"],
     queryFn: Walletbalance,
   });
 }
 export function CreateWalletAmount(client) {
+
   return useMutation({
     onMutate:(data)=>WalletComplete(data),
-    onSuccess:()=>{
-      client.invalidateQueries({ queryKey: ["shop-wallet-balance"] })
-    }
+    onSuccess:(res)=>{
+      console.log("log",res)
+      client.invalidateQueries({ queryKey: ["shop-wallet-balance"] });
+    },
   })
 }

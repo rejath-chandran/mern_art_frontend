@@ -6,9 +6,12 @@ import { useQueryClient } from "@tanstack/react-query";
 
 const UserWallet = () => {
 
-  const client = useQueryClient()
+const client = useQueryClient()
+
  const wallet=CreateWalletAmount(client)
+
  const Balance=WalletB()
+ 
   const AmountRef=useRef(0)
 
   const [Razorpay] = useRazorpay();
