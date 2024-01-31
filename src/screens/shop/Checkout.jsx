@@ -1,35 +1,33 @@
 import React, { useRef, useState } from "react";
 import Usercart from "../../components/Usercart";
 import { CartStore } from "../../store";
-import {MakeOrder} from "../../services/AdminQry.js"
+import { MakeOrder } from "../../services/AdminQry.js";
 import useRazorpay from "react-razorpay";
 import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const navigate = useNavigate();
-   const [Razorpay] = useRazorpay();
-   const { cart ,resetCart} = CartStore();
+  const [Razorpay] = useRazorpay();
+  const { cart, resetCart } = CartStore();
 
-   const Order=MakeOrder(Razorpay,navigate)
-    const name=useRef('')
-    const email=useRef('')
-    const phone=useRef('')
-    const adress=useRef('')
-    
- 
+  const Order = MakeOrder(Razorpay, navigate, resetCart);
+  const name = useRef("");
+  const email = useRef("");
+  const phone = useRef("");
+  const adress = useRef("");
 
- const CheckOutHandler=(e)=>{
-    e.preventDefault()
-    let data={
-        name:name.current,
-        email:email.current,
-        phone:phone.current,
-        adress:adress.current,
-        cart:cart
-    }
-    Order.mutate(data)
-    resetCart()
- }
+  const CheckOutHandler = (e) => {
+    e.preventDefault();
+    let data = {
+      name: name.current,
+      email: email.current,
+      phone: phone.current,
+      adress: adress.current,
+      cart: cart,
+    };
+    Order.mutate(data);
+    // resetCart();
+  };
 
   return (
     <div>
@@ -49,7 +47,7 @@ const Checkout = () => {
                   type="text"
                   id="name"
                   name="name"
-                  onChange={e=>name.current=e.target.value}
+                  onChange={(e) => (name.current = e.target.value)}
                   className="mt-1 p-2 w-full border rounded-md"
                   required
                 />
@@ -65,7 +63,7 @@ const Checkout = () => {
                   type="email"
                   id="email"
                   name="email"
-                  onChange={e=>email.current=e.target.value}
+                  onChange={(e) => (email.current = e.target.value)}
                   className="mt-1 p-2 w-full border rounded-md"
                   required
                 />
@@ -81,7 +79,7 @@ const Checkout = () => {
                   type="tel"
                   id="phone"
                   name="phone"
-                  onChange={e=>phone.current=e.target.value}
+                  onChange={(e) => (phone.current = e.target.value)}
                   className="mt-1 p-2 w-full border rounded-md"
                   required
                 />
@@ -97,7 +95,7 @@ const Checkout = () => {
                   type="text"
                   id="address"
                   name="address"
-                  onChange={e=>adress.current=e.target.value}
+                  onChange={(e) => (adress.current = e.target.value)}
                   className="mt-1 p-2 w-full border rounded-md"
                   required
                 />

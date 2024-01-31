@@ -5,19 +5,18 @@ import { CreateWalletAmount, WalletB } from "../../services/AdminQry";
 import { useQueryClient } from "@tanstack/react-query";
 
 const UserWallet = () => {
+  const client = useQueryClient();
 
-const client = useQueryClient()
+  const wallet = CreateWalletAmount(client);
 
- const wallet=CreateWalletAmount(client)
+  const Balance = WalletB();
 
- const Balance=WalletB()
- 
-  const AmountRef=useRef(0)
+  const AmountRef = useRef(0);
 
   const [Razorpay] = useRazorpay();
 
   const handlePayment = async (params) => {
-    const res=await WalletOrder(AmountRef.current)
+    const res = await WalletOrder(AmountRef.current);
     const options = {
       key: "rzp_test_1Ez7RpNLZ42xoT",
       amount: res.amount,
@@ -27,10 +26,10 @@ const client = useQueryClient()
       image: "https://d1s2w0upia4e9w.cloudfront.net/images/favicon.ico",
       order_id: res.id,
       handler: function (response) {
-        let data={
-        "amount":res.amount
-        }
-          wallet.mutate(data)
+        let data = {
+          amount: res.amount,
+        };
+        wallet.mutate(data);
       },
       notes: {
         address: "Galleria India",
@@ -49,16 +48,16 @@ const client = useQueryClient()
 
         <div className="flex items-center mb-4">
           <label className="mr-2">Balance:</label>
-          <label
-            
-          >{Balance.isLoading?<>Loading...</>:<>{Balance.data.amount}</>}</label>
+          <label>
+            {Balance.isLoading ? <>Loading...</> : <>{Balance.data.amount}</>}
+          </label>
         </div>
 
         <div className="flex items-center mb-4">
           <label className="mr-2">Amount:</label>
           <input
             type="number"
-            onChange={(e) =>AmountRef.current=e.target.value}
+            onChange={(e) => (AmountRef.current = e.target.value)}
             className="border p-2 rounded-md"
           />
         </div>

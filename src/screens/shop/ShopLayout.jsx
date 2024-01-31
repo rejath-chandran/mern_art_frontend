@@ -10,8 +10,9 @@ import {
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
-import { CartStore, useLoggedInStore } from "../../store";
+import { CartStore, SearchStore, useLoggedInStore } from "../../store";
 import { io } from "socket.io-client";
+import SearchBar from "../../components/SearchBar";
 
 const currencies = ["INR"];
 const navigation = {
@@ -23,18 +24,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-
 const ShopLayout = () => {
+  const { open } = SearchStore();
   let isLoggedin = useLoggedInStore((state) => state.loggedIn);
   let logout = useLoggedInStore((state) => state.logout);
   let { CartCount } = CartStore();
   const dropdownRef = useRef(null);
-  
-  
-  
 
-  
-  const [notifications,SetNotify ]= useState([])
+  const [notifications, SetNotify] = useState([]);
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -53,7 +50,6 @@ const ShopLayout = () => {
   //    })
 
   useEffect(() => {
-    
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
@@ -147,32 +143,16 @@ const ShopLayout = () => {
                   </Link>
                 </div>
 
-                {/* Mobile menu and search (lg-) */}
-                <div className="flex flex-1 items-center lg:hidden">
-                  <button
-                    type="button"
-                    className="-ml-2 rounded-md bg-white p-2 text-gray-400"
-                    onClick={() => setOpen(true)}
-                  >
-                    <span className="sr-only">Open menu</span>
-                    <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                </div>
-
-                {/* Logo (lg-) */}
-                <a href="#" className="lg:hidden">
-                  <span className="sr-only">Your Company</span>
-                  <img
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt=""
-                    className="h-8 w-auto"
-                  />
-                </a>
-
                 <div className="flex flex-1 items-center justify-end">
                   <div className="flex items-center lg:ml-8">
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-8">
+                      <Link
+                        className="ml-2 text-md font-medium text-gray-600 group-hover:text-gray-800"
+                        onClick={() => open()}
+                      >
+                        Search
+                      </Link>
                       <Link
                         className="ml-2 text-md font-medium text-gray-600 group-hover:text-gray-800"
                         to={"/auction"}
@@ -250,7 +230,13 @@ const ShopLayout = () => {
           </div>
         </nav>
       </header>
-      <Outlet />
+
+      <div className="relative w-[100vw] h-[100vh]">
+        <SearchBar />
+        {/* <div className="absolute p-12 z-1"> */}
+        <Outlet />
+        {/* </div> */}
+      </div>
     </>
   );
 };

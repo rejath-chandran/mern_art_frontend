@@ -1,5 +1,5 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
-
+import { toast } from "react-toastify";
 import {
   GetAllCategory,
   PostCategory,
@@ -22,6 +22,7 @@ import {
   VerifyOrder,
   WalletComplete,
   Walletbalance,
+  GetuserOrder,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -165,6 +166,9 @@ export function CreateBid(client) {
       client.invalidateQueries({ queryKey: ["auction-id"] });
       client.invalidateQueries({ queryKey: ["bid-id"] });
     },
+    onError: () => {
+      toast.error("wallet balance low");
+    },
   });
 }
 export function BidByID(id) {
@@ -174,30 +178,32 @@ export function BidByID(id) {
   });
 }
 
-
-
 //order
-export function MakeOrder(Razorpay,navigate){
+export function GetUserOrders() {
+  return useQuery({
+    queryKey: ["user-order-dash"],
+    queryFn: GetuserOrder,
+  });
+}
+export function MakeOrder(Razorpay, navigate, resetCart) {
   return useMutation({
-    mutationFn:(data)=>PostOrder(data),
-    onSuccess:(res)=>{
-
+    mutationFn: (data) => PostOrder(data),
+    onSuccess: (res) => {
       const options = {
         key: "rzp_test_1Ez7RpNLZ42xoT",
-        amount:res.data.amount,
+        amount: res.data.amount,
         currency: "INR",
         name: "Art Galleria",
         description: "wallet payment",
         image: "https://d1s2w0upia4e9w.cloudfront.net/images/favicon.ico",
-        order_id:res.data.order_id,
+        order_id: res.data.order_id,
         handler: function (response) {
-
-          let data={
-            order_id:response.razorpay_order_id
-          }
-          
-          VerifyOrder(data)
-          navigate("/")
+          let data = {
+            order_id: response.razorpay_order_id,
+          };
+          resetCart();
+          VerifyOrder(data);
+          navigate("/");
         },
         notes: {
           address: "Galleria India",
@@ -208,8 +214,8 @@ export function MakeOrder(Razorpay,navigate){
       };
       const rzp1 = new Razorpay(options);
       rzp1.open();
-    }
-  })
+    },
+  });
 }
 export function WalletB() {
   return useQuery({
@@ -218,12 +224,11 @@ export function WalletB() {
   });
 }
 export function CreateWalletAmount(client) {
-
   return useMutation({
-    onMutate:(data)=>WalletComplete(data),
-    onSuccess:(res)=>{
-      console.log("log",res)
+    onMutate: (data) => WalletComplete(data),
+    onSuccess: (res) => {
+      console.log("log", res);
       client.invalidateQueries({ queryKey: ["shop-wallet-balance"] });
     },
-  })
+  });
 }

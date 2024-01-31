@@ -16,7 +16,6 @@ const geIntialUserType = () => {
   return userType;
 };
 
-
 // export const useLoggedInStore = create( persist((set,get)=>({
 //   loggedIn:false,
 //   userType:"customer",
@@ -32,8 +31,7 @@ const geIntialUserType = () => {
 //     user_token:''
 //   }))
 
-// }),{name:"AuthStore"})) 
-
+// }),{name:"AuthStore"}))
 
 export const useLoggedInStore = create((set) => ({
   loggedIn: getInitialLoggedIn(),
@@ -79,10 +77,18 @@ export const CartStore = create(
         let newcart = cart.filter((i) => i.id != id);
         set({ cart: newcart, CartCount: newcart.length });
       },
-      resetCart:()=>{set({cart:[],CartCount:0})}
+      resetCart: () => {
+        set({ cart: [], CartCount: 0 });
+      },
     }),
     {
       name: "CartStorage",
     },
   ),
 );
+
+export const SearchStore = create((set) => ({
+  visible: false,
+  open: () => set({ visible: true }),
+  close: () => set({ visible: false }),
+}));
