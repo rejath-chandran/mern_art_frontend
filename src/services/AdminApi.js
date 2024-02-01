@@ -119,3 +119,8 @@ export const WalletComplete = async (amount) => {
 export const Walletbalance = async () => {
   return (await axioInstance.get(`api/walletbalance`, { headers })).data;
 };
+
+//account
+export const PostMakeasSeller = async () => {
+  return axioInstance.post("api/makerseller", { headers });
+};

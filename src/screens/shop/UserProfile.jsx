@@ -1,8 +1,20 @@
 import React from "react";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import { UserToSeller } from "../../services/AdminQry";
 const UserProfile = () => {
+  const seller = UserToSeller();
   return (
     <div>
+      <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+        <div className="mt-2 sm:col-span-2 sm:mt-0">
+          <button
+            className="p-2 bg-green-700 text-white hover:bg-green-500 rounded-md"
+            onClick={() => seller.mutate()}
+          >
+            Click To Become Seller
+          </button>
+        </div>
+      </div>
       <form>
         <div className="space-y-12 sm:space-y-16">
           <div>
@@ -13,22 +25,7 @@ const UserProfile = () => {
               This information will be displayed publicly so be careful what you
               share.
             </p>
-
             <div className="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
-              <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label
-                  htmlFor="username"
-                  className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
-                >
-                  Seller
-                </label>
-                <div className="mt-2 sm:col-span-2 sm:mt-0">
-                  <button className="p-4 bg-green-300 rounded-sm">
-                    Click To Become Seller
-                  </button>
-                </div>
-              </div>
-
               <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                 <label
                   htmlFor="username"

@@ -23,6 +23,7 @@ import {
   WalletComplete,
   Walletbalance,
   GetuserOrder,
+  PostMakeasSeller,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -225,10 +226,23 @@ export function WalletB() {
 }
 export function CreateWalletAmount(client) {
   return useMutation({
-    onMutate: (data) => WalletComplete(data),
+    mutationFn: (data) => WalletComplete(data),
     onSuccess: (res) => {
       console.log("log", res);
       client.invalidateQueries({ queryKey: ["shop-wallet-balance"] });
+    },
+  });
+}
+
+//account
+export function UserToSeller() {
+  return useMutation({
+    mutationFn: () => PostMakeasSeller(),
+    onSuccess: () => {
+      toast.success("Now You're Seller too!!!");
+    },
+    onError: (error) => {
+      console.log(error);
     },
   });
 }
