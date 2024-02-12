@@ -24,6 +24,8 @@ import {
   Walletbalance,
   GetuserOrder,
   PostMakeasSeller,
+  GetSellerOrders,
+  UpdateSellerOrderStatus,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -234,6 +236,20 @@ export function CreateWalletAmount(client) {
   });
 }
 
+export function GetAllSellerOrders(data) {
+  return useQuery({
+    queryKey: ["all-user-order", data],
+    queryFn: GetSellerOrders,
+  });
+}
+export function PostOrderUpdate(client) {
+  return useMutation({
+    mutationFn: (data) => UpdateSellerOrderStatus(data),
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ["all-user-order"] });
+    },
+  });
+}
 //account
 export function UserToSeller() {
   return useMutation({

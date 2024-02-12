@@ -124,3 +124,12 @@ export const Walletbalance = async () => {
 export const PostMakeasSeller = async () => {
   return axioInstance.post("api/makerseller", { headers });
 };
+
+export const GetSellerOrders = async (key) => {
+  let id = key.queryKey[1];
+  return (await axioInstance.get(`api/sellerorder/${id}`, { headers })).data;
+};
+
+export const UpdateSellerOrderStatus = async (data) => {
+  return await axioInstance.post("api/changeorderstatus", data, { headers });
+};

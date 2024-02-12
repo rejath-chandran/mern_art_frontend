@@ -44,7 +44,7 @@ const AccountLayout = () => {
         </nav>
       </div>
 
-      <div className="flex-1 p-4">
+      <div className="flex-1 p-4 overflow-auto w-full h-[90vh]">
         <Outlet />
       </div>
     </div>
