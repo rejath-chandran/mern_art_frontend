@@ -71,9 +71,27 @@ const Products = () => {
                 <h2 className="text-2xl font-semibold mb-4">
                   {Item.data.name.toUpperCase()}
                 </h2>
-                <p className="text-gray-600 mb-4">{Item.data.desc}</p>
+                <div className="text-gray-600 mb-4 ">
+                  <div className="overflow-x-auto">
+                    <table className="table">
+                      <tbody>
+                        {Item.data.desc.split(",").map((item) => (
+                          <>
+                            <tr>
+                              {item.split("-").map((i) => (
+                                <>
+                                  <td>{i}</td>
+                                </>
+                              ))}
+                            </tr>
+                          </>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-xl font-bold text-blue-500">
+                  <span className="text-2xl mx-6 font-bold text-blue-500">
                     ₹{Item.data.price}
                   </span>
                   {IsinCart ? (

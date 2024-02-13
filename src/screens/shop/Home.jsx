@@ -40,8 +40,11 @@ const Home = () => {
         aria-labelledby="products-heading"
         className="mx-auto max-w-2xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-16 lg:max-w-7xl lg:px-8"
       >
-        <h2 id="products-heading" className="sr-only">
-          Products
+        <h2
+          id="products-heading"
+          className="text-2xl mb-5 font-bold text-black"
+        >
+          Categories
         </h2>
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">

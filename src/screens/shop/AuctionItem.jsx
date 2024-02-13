@@ -4,6 +4,8 @@ import { AuctionByID, BidByID, CreateBid } from "../../services/AdminQry";
 import { useLoggedInStore } from "../../store";
 import { useQueryClient } from "@tanstack/react-query";
 
+import Countdown from "react-countdown";
+
 const AuctionItem = () => {
   const client = useQueryClient();
   const { id } = useParams();
@@ -47,24 +49,22 @@ const AuctionItem = () => {
                   <>
                     {isLoggedIN && userType == "customer" ? (
                       <>
-                        <button
-                          className="bg-blue-500 text-white px-6 py-3 rounded-md"
-                          onClick={() => CreateNewBid(1000)}
-                        >
-                          BID 1000+
-                        </button>
-                        <button
-                          className="bg-blue-500 text-white px-6 py-3 rounded-md"
-                          onClick={() => CreateNewBid(5000)}
-                        >
-                          BID 5000+
-                        </button>
+                        <input
+                          type="number"
+                          className="bg-blue-100 h-12 outline-none p-6 text-black"
+                          placeholder="Enter amount"
+                        />
                         <button
                           className="bg-blue-500 text-white px-6 py-3 rounded-md"
                           onClick={() => CreateNewBid(10000)}
                         >
-                          BID 10000+
+                          BID
                         </button>
+                        <Countdown
+                          date={Date.now() + 90000000}
+                          // renderer={renderer}
+                        />
+                        ,
                       </>
                     ) : (
                       <>
