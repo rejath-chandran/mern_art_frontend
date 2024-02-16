@@ -40,6 +40,14 @@ export const PostUserLogin = async (data) => {
 };
 
 //Products
+
+export const GetProductByArtist = async (key) => {
+  const id = key.queryKey[1];
+  let data = (await axioInstance.get(`api/product/artist/${id}`, { headers }))
+    .data;
+  return data;
+};
+
 export const GetAllProduct = async () => {
   let data = (await axioInstance.get("api/product", { headers })).data;
   return data;

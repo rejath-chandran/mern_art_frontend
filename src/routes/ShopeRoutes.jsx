@@ -18,6 +18,7 @@ import AuctionItem from "../screens/shop/AuctionItem";
 import { Navigate } from "react-router-dom";
 import Checkout from "../screens/shop/Checkout";
 import Order from "../screens/shop/Order";
+import ArtistView from "../screens/shop/ArtistView";
 const ShopeRoutes = () => {
   return (
     <>
@@ -32,6 +33,7 @@ const ShopeRoutes = () => {
           <Route index element={<Home />} />
           <Route path="category/:value" element={<Category />} />
           <Route path="item/:id" element={<Products />} />
+          <Route path="artist/:id" element={<ArtistView />} />
           <Route path="auction" element={<Auction />} />
           <Route path="auction/:id" element={<AuctionItem />} />
           <Route path="cart" element={<Cart />} />

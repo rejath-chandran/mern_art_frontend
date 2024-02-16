@@ -26,6 +26,7 @@ import {
   PostMakeasSeller,
   GetSellerOrders,
   UpdateSellerOrderStatus,
+  GetProductByArtist,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -80,6 +81,13 @@ export function LoginUser(setLogin, notify) {
 }
 
 //PRoduct
+
+export function AllProductByArtist(id) {
+  return useQuery({
+    queryKey: ["all-product-artist", id],
+    queryFn: GetProductByArtist,
+  });
+}
 
 export function CreateProduct(client) {
   return useMutation({

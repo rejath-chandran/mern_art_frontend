@@ -71,6 +71,12 @@ const Products = () => {
                 <h2 className="text-2xl font-semibold mb-4">
                   {Item.data.name.toUpperCase()}
                 </h2>
+                <Link
+                  className="text-blue-400 font-bold"
+                  to={`/artist/${Item.data.artistId}`}
+                >
+                  Artist: {Item.data.artist}
+                </Link>
                 <div className="text-gray-600 mb-4 ">
                   <div className="overflow-x-auto">
                     <table className="table">
