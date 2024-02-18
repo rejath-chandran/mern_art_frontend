@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import EditModal from "./EditModal";
+import DatePickerTime from "./DatePickerTime";
 
 const Table = ({ submit, data, Delete, heads, selection, actions }) => {
   const ValueRef = useRef({});
@@ -52,12 +53,7 @@ const Table = ({ submit, data, Delete, heads, selection, actions }) => {
                             {actions == "auction" ? (
                               <>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-0">
-                                  <button
-                                    className="ml-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 mx-auto transition duration-150 ease-in-out hover:bg-red-600 bg-red-700 rounded text-white px-1 sm:px-2 py-2 text-xs sm:text-sm"
-                                    onClick={() => Delete(i._id)}
-                                  >
-                                    END AUCTION
-                                  </button>
+                                  <DatePickerTime />
                                 </td>
                               </>
                             ) : (

@@ -27,6 +27,7 @@ import {
   GetSellerOrders,
   UpdateSellerOrderStatus,
   GetProductByArtist,
+  DeleteAuction,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -154,9 +155,17 @@ export function CreateAuction(client) {
   return useMutation({
     mutationFn: (data) => PostAuction(data),
     onSuccess: (res) => {
-      // client.invalidateQueries({ queryKey: ["all-product"] })
+      client.invalidateQueries({ queryKey: ["all-auction"] });
     },
     onError: () => {},
+  });
+}
+export function DeleteSellerAuction(client) {
+  return useMutation({
+    mutationFn: (data) => DeleteAuction(data),
+    onSuccess: (res) => {
+      client.invalidateQueries({ queryKey: ["all-auction"] });
+    },
   });
 }
 export function UpdateAuction(client) {

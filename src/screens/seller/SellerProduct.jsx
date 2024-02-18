@@ -13,6 +13,7 @@ import {
 } from "../../services/AdminQry.js";
 
 import { useQueryClient } from "@tanstack/react-query";
+import ProductTable from "../../components/ProductTable.jsx";
 
 const SellerProduct = () => {
   const client = useQueryClient();
@@ -63,15 +64,9 @@ const SellerProduct = () => {
       {isLoading ? (
         <>loading</>
       ) : (
-        <>
-          <Table
-            submit={EditSubmit}
-            Delete={DeleteSubmit}
-            data={data}
-            heads={heads}
-            selection={cat_data.data}
-          />
-        </>
+        <div className="bg-gray-800 rounded-md container text-white w-ful h-[83vh] w-[80vw]">
+          <ProductTable   DeleteSubmit={DeleteSubmit} />
+        </div>
       )}
       {error && <>something went wrong</>}
       {modal ? (

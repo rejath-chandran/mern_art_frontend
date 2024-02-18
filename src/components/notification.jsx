@@ -8,8 +8,9 @@ function Notification({ toggleDropdown, isDropdownOpen, dropdownRef }) {
   useEffect(() => {
     const socket = io.connect("http://localhost:8000");
 
-    socket.on("connect", (message) => {
+    socket.on("notify", (message) => {
       console.log("notify", message);
+      SetNotify(message);
     });
 
     return function () {
@@ -41,23 +42,30 @@ function Notification({ toggleDropdown, isDropdownOpen, dropdownRef }) {
 
       <span className="mb-1">{notifications.length}</span>
       {isDropdownOpen && (
-        <div className="absolute z-50 right-0 mt-2 w-64 h-64  border rounded-md shadow-md">
-          <div className="p-2 h-full w-full  bg-fuchsia-200" ref={dropdownRef}>
-            {notifications.map((notification) => (
-              <div
-                key={notification.id}
-                className="cursor-pointer  p-2"
-                onClick={() => console.log(notification.id)}
-              >
-                {console.log("hey", notification)}
-                <div className="text-sm text-black font-semibold">
-                  {notification.message}
+        <>
+          <div className="absolute z-50 right-0 mt-2 w-64 h-64  border rounded-md shadow-md">
+            <div
+              className="p-2 h-full w-full  bg-fuchsia-200"
+              ref={dropdownRef}
+            >
+              {notifications.map((notification) => (
+                <div
+                  key={notification.id}
+                  className="cursor-pointer  p-2"
+                  onClick={() => console.log(notification.id)}
+                >
+                  {console.log("hey", notification)}
+                  <div className="text-sm text-black font-semibold">
+                    {notification.message}
+                  </div>
+                  <div className="text-xs text-gray-500">
+                    {notification.date}
+                  </div>
                 </div>
-                <div className="text-xs text-gray-500">{notification.date}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

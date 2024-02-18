@@ -6,7 +6,9 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const Render = () => {
   const role = useLoggedInStore((state) => state.userType);
+  
   console.log("type", role);
+
   if (role === "admin") {
     return <AdminRoutes />;
   } else if (role === "seller") {
