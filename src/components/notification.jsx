@@ -45,13 +45,13 @@ function Notification({ toggleDropdown, isDropdownOpen, dropdownRef }) {
         <>
           <div className="absolute z-50 right-0 mt-2 w-64 h-64  border rounded-md shadow-md">
             <div
-              className="p-2 h-full w-full  bg-fuchsia-200"
+              className="p-2 h-full w-full  bg-slate-100 overflow-y-auto"
               ref={dropdownRef}
             >
               {notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className="cursor-pointer  p-2"
+                  className="cursor-pointer  p-2 border-4"
                   onClick={() => console.log(notification.id)}
                 >
                   {console.log("hey", notification)}

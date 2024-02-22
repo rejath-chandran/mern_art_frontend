@@ -13,7 +13,7 @@ import Countdown from "react-countdown";
 import CountDownTimer from "./CountDownTimer";
 import EditProduct from "./EditProduct";
 
-function ProductTable({DeleteSubmit}) {
+function ProductTable({ DeleteSubmit }) {
   const client = useQueryClient();
   const { data, isLoading } = AllProduct();
 
@@ -61,7 +61,7 @@ function ProductTable({DeleteSubmit}) {
           <EditProduct data={p.row.original} />
           <span
             key={p.row.original._id}
-            onClick={()=>DeleteSubmit(p.row.original._id)}
+            onClick={() => DeleteSubmit(p.row.original._id)}
             className="btn btn-outline btn-error mx-3"
           >
             DELETE

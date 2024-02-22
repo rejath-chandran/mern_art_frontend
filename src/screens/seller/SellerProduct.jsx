@@ -65,7 +65,7 @@ const SellerProduct = () => {
         <>loading</>
       ) : (
         <div className="bg-gray-800 rounded-md container text-white w-ful h-[83vh] w-[80vw]">
-          <ProductTable   DeleteSubmit={DeleteSubmit} />
+          <ProductTable DeleteSubmit={DeleteSubmit} />
         </div>
       )}
       {error && <>something went wrong</>}
