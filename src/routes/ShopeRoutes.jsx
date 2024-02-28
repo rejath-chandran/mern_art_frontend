@@ -19,6 +19,10 @@ import { Navigate } from "react-router-dom";
 import Checkout from "../screens/shop/Checkout";
 import Order from "../screens/shop/Order";
 import ArtistView from "../screens/shop/ArtistView";
+import AuthChecker from "../components/AuthChecker";
+import AboutUs from "../screens/shop/AboutUs";
+import ContactUs from "../screens/shop/ContactUs";
+import AnimatedPage from "../components/AnimatedPage";
 const ShopeRoutes = () => {
   return (
     <>
@@ -29,16 +33,55 @@ const ShopeRoutes = () => {
         <Route path="/seller/*" element={<SellerLogin />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+
         <Route path="/" element={<ShopLayout />}>
           <Route index element={<Home />} />
-          <Route path="category/:value" element={<Category />} />
-          <Route path="item/:id" element={<Products />} />
-          <Route path="artist/:id" element={<ArtistView />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route
+            path="category/:value"
+            element={
+              <AnimatedPage>
+                <Category />
+              </AnimatedPage>
+            }
+          />
+          <Route
+            path="item/:id"
+            element={
+              <AnimatedPage>
+                <Products />
+              </AnimatedPage>
+            }
+          />
+          <Route
+            path="artist/:id"
+            element={
+              <AnimatedPage>
+                {" "}
+                <ArtistView />
+              </AnimatedPage>
+            }
+          />
           <Route path="auction" element={<Auction />} />
           <Route path="auction/:id" element={<AuctionItem />} />
           <Route path="cart" element={<Cart />} />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="account" element={<AccountLayout />}>
+          <Route
+            path="checkout"
+            element={
+              <AuthChecker>
+                <Checkout />
+              </AuthChecker>
+            }
+          />
+          <Route
+            path="account"
+            element={
+              <AuthChecker>
+                <AccountLayout />
+              </AuthChecker>
+            }
+          >
             <Route index element={<UserProfile />} />
             <Route path="wallet" element={<UserWallet />} />
             <Route path="orders" element={<Order />} />

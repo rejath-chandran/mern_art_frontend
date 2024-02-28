@@ -40,7 +40,7 @@ function Notification({ toggleDropdown, isDropdownOpen, dropdownRef }) {
         </svg>
       </button>
 
-      <span className="mb-1">{notifications.length}</span>
+      <span className="badge badge-secondary mb-1">{notifications.length}</span>
       {isDropdownOpen && (
         <>
           <div className="absolute z-50 right-0 mt-2 w-64 h-64  border rounded-md shadow-md">

@@ -8,6 +8,7 @@ import SellerOrder from "../screens/seller/SellerOrder";
 import SoldAuction from "../screens/seller/SoldAuction";
 import { Navigate } from "react-router-dom";
 import AuctionTable from "../components/AuctionTable";
+import AuthChecker from "../components/AuthChecker";
 export const SellerRoutes = () => {
   return (
     <Routes>

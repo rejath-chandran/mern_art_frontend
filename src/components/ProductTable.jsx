@@ -13,7 +13,7 @@ import Countdown from "react-countdown";
 import CountDownTimer from "./CountDownTimer";
 import EditProduct from "./EditProduct";
 
-function ProductTable({ DeleteSubmit }) {
+function ProductTable({ DeleteSubmit, EditSubmit, category_list }) {
   const client = useQueryClient();
   const { data, isLoading } = AllProduct();
 
@@ -42,7 +42,22 @@ function ProductTable({ DeleteSubmit }) {
     {
       accessorKey: "desc",
       header: "DESC",
-      cell: (p) => <p>{p.getValue()}</p>,
+      cell: (p) => (
+        <div className="overflow-auto">
+          <table className="table w-full h-full">
+            {p
+              .getValue()
+              .split(",")
+              .map((item) => (
+                <tr>
+                  {item.split("-").map((row) => (
+                    <td>{row}</td>
+                  ))}
+                </tr>
+              ))}
+          </table>
+        </div>
+      ),
     },
     {
       accessorKey: "category",
@@ -52,13 +67,17 @@ function ProductTable({ DeleteSubmit }) {
     {
       accessorKey: "price",
       header: "PRICE",
-      cell: (p) => <p>{p.getValue()}</p>,
+      cell: (p) => <p> ₹{p.getValue()}</p>,
     },
     {
       header: "ACTION",
       cell: (p) => (
-        <>
-          <EditProduct data={p.row.original} />
+        <div className="flex">
+          <EditProduct
+            data={p.row.original}
+            EditSubmit={EditSubmit}
+            category_list={category_list}
+          />
           <span
             key={p.row.original._id}
             onClick={() => DeleteSubmit(p.row.original._id)}
@@ -66,7 +85,7 @@ function ProductTable({ DeleteSubmit }) {
           >
             DELETE
           </span>
-        </>
+        </div>
       ),
     },
   ];

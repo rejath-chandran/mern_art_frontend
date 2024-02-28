@@ -6,7 +6,7 @@ function ArtistView() {
   const { id } = useParams();
   const { data, isLoading } = AllProductByArtist(id);
   return (
-    <div className="w-full h-full bg-fuchsia-100">
+    <div className="w-full h-[150vh] bg-fuchsia-100">
       <div className="grid grid-cols-12 h-full w-full">
         <div className="col-span-2 px-7 pt-7">
           <div className="grid mt-4">

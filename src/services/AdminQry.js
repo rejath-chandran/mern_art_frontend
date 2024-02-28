@@ -28,6 +28,8 @@ import {
   UpdateSellerOrderStatus,
   GetProductByArtist,
   DeleteAuction,
+  PostSytem,
+  GetSytem,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -277,5 +279,20 @@ export function UserToSeller() {
     onError: (error) => {
       console.log(error);
     },
+  });
+}
+
+export function PostSystemDetail() {
+  return useMutation({
+    mutationFn: (data) => PostSytem(data),
+    onSuccess: () => {
+      toast.success("Now You're Seller too!!!");
+    },
+  });
+}
+export function GetSystemDetails() {
+  return useQuery({
+    queryKey: ["system-details"],
+    queryFn: GetSytem,
   });
 }

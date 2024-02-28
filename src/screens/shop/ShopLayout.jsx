@@ -11,10 +11,11 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 import { CartStore, SearchStore, useLoggedInStore } from "../../store";
-
+import { useLocation } from "react-router-dom";
 import SearchBar from "../../components/SearchBar";
 import Notification from "../../components/notification";
-
+import ScrollTop from "../../components/ScrollTop";
+import { GetSystemDetails } from "../../services/AdminQry";
 const currencies = ["INR"];
 const navigation = {
   categories: [],
@@ -26,6 +27,9 @@ function classNames(...classes) {
 }
 
 const ShopLayout = () => {
+  const { data, isLoading } = GetSystemDetails();
+
+  const { pathname } = useLocation();
   const { open } = SearchStore();
   let isLoggedin = useLoggedInStore((state) => state.loggedIn);
   let logout = useLoggedInStore((state) => state.logout);
@@ -53,8 +57,10 @@ const ShopLayout = () => {
   }, []);
 
   return (
-    <>
-      <header className="relative">
+    <div className="border-none grid grid-rows-12">
+      <ScrollTop />
+
+      <header className="relative row-span-1">
         <nav aria-label="Top">
           {/* Top navigation */}
           <div className="bg-gray-900">
@@ -130,11 +136,11 @@ const ShopLayout = () => {
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
                   <Link to={"/"}>
                     <span className="sr-only">Your Company</span>
-                    <img
-                      className="h-8 w-auto"
-                      src="https://d1s2w0upia4e9w.cloudfront.net/images/favicon.ico"
-                      alt=""
-                    />
+                    {isLoading ? (
+                      <>loading...</>
+                    ) : (
+                      <img className="h-8 w-auto" src={data.logo} alt="" />
+                    )}
                   </Link>
                 </div>
 
@@ -154,10 +160,16 @@ const ShopLayout = () => {
                       >
                         Auction
                       </Link>
-                      <Link className="ml-2 text-md font-medium text-gray-600 group-hover:text-gray-800">
+                      <Link
+                        className="ml-2 text-md font-medium text-gray-600 group-hover:text-gray-800"
+                        to={"/about"}
+                      >
                         About
                       </Link>
-                      <Link className="ml-2 text-md font-medium text-gray-600 group-hover:text-gray-800">
+                      <Link
+                        className="ml-2 text-md font-medium text-gray-600 group-hover:text-gray-800"
+                        to={"/contact"}
+                      >
                         Contact
                       </Link>
                     </div>
@@ -176,7 +188,7 @@ const ShopLayout = () => {
                           className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                           aria-hidden="true"
                         />
-                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+                        <span className="badge ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
                           {CartCount}
                         </span>
                         <span className="sr-only">items in cart, view bag</span>
@@ -190,13 +202,24 @@ const ShopLayout = () => {
         </nav>
       </header>
 
-      <div className="relative w-[100vw] h-[100vh]">
+      <div className="relative w-full h-full row-span-10">
         <SearchBar />
         {/* <div className="absolute p-12 z-1"> */}
         <Outlet />
         {/* </div> */}
       </div>
-    </>
+      {pathname != "/" && (
+        <footer className="relative row-span-1 bg-black mt-6 footer footer-center p-4  text-base-content">
+          <aside className="text-white">
+            {isLoading ? (
+              <>loading...</>
+            ) : (
+              <p>Copyright © 2024 - All right {data.name}</p>
+            )}
+          </aside>
+        </footer>
+      )}
+    </div>
   );
 };
 

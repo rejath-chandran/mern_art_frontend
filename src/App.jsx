@@ -1,8 +1,8 @@
 import { lazy } from "react";
 import { AdminRoutes } from "./routes/AdminRoutes";
-import { SellerRoutes } from "./routes/SellerRoutes" ;
+import { SellerRoutes } from "./routes/SellerRoutes";
 import ShopeRoutes from "./routes/ShopeRoutes";
- 
+
 // const ShopeRoutes=lazy(()=>import("./routes/ShopeRoutes"))
 // const SellerRoutes=lazy(()=>import("./routes/SellerRoutes"))
 // const AdminRoutes=lazy(()=>import( "./routes/AdminRoutes"))

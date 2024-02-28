@@ -26,6 +26,7 @@ const SellerProduct = () => {
   const remove = RemoveProduct(client);
 
   function EditSubmit(data) {
+    console.log(data);
     update.mutate(JSON.stringify(data));
     toast.success("Updated");
   }
@@ -65,7 +66,11 @@ const SellerProduct = () => {
         <>loading</>
       ) : (
         <div className="bg-gray-800 rounded-md container text-white w-ful h-[83vh] w-[80vw]">
-          <ProductTable DeleteSubmit={DeleteSubmit} />
+          <ProductTable
+            DeleteSubmit={DeleteSubmit}
+            EditSubmit={EditSubmit}
+            category_list={cat_data}
+          />
         </div>
       )}
       {error && <>something went wrong</>}

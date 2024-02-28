@@ -141,3 +141,10 @@ export const GetSellerOrders = async (key) => {
 export const UpdateSellerOrderStatus = async (data) => {
   return await axioInstance.post("api/changeorderstatus", data, { headers });
 };
+
+export const PostSytem = async (data) => {
+  return await axioInstance.post("api/system", data, { headers });
+};
+export const GetSytem = async () => {
+  return (await axioInstance.get("api/system", { headers })).data;
+};
