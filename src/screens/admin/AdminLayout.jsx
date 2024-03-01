@@ -30,6 +30,16 @@ let menu = [
     icon: <CiShoppingCart className="h-full w-full" />,
   },
   {
+    name: "USERS",
+    path: "products",
+    icon: <CiShoppingCart className="h-full w-full" />,
+  },
+  {
+    name: "CONTACT",
+    path: "products",
+    icon: <CiShoppingCart className="h-full w-full" />,
+  },
+  {
     name: "SETTINGS",
     path: "settings",
     icon: <CiSettings className="h-full w-full" />,

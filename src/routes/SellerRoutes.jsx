@@ -9,6 +9,8 @@ import SoldAuction from "../screens/seller/SoldAuction";
 import { Navigate } from "react-router-dom";
 import AuctionTable from "../components/AuctionTable";
 import AuthChecker from "../components/AuthChecker";
+import SettledWallet from "../screens/seller/SettledWallet";
+import SellerWalletTable from "../screens/seller/SellerWalletTable";
 export const SellerRoutes = () => {
   return (
     <Routes>
@@ -21,8 +23,16 @@ export const SellerRoutes = () => {
           <Route path="sold_auction" element={<SoldAuction />} />
         </Route>
 
-        <Route path="auction_sold" element={<SoldAuction />} />
-        <Route path="wallet" element={<SellerWallet />} />
+        {/* <Route path="auction_sold" element={<SoldAuction />} /> */}
+
+        <Route element={<SellerWallet />}>
+           <Route path="settled" element={<SettledWallet/>} /> 
+           <Route path="wallet" element={<SellerWalletTable/>}/>
+        </Route>
+
+        
+        
+        
         <Route path="orders" element={<SellerOrder />} />
       </Route>
     </Routes>
