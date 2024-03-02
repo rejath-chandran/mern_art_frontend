@@ -12,7 +12,10 @@ function DataTable({ data, columns }) {
   });
   return (
     <>
-      <div className=" h-full overflow-x-auto bg-black">
+      {
+        data.length==0?<div className="text-2xl font-mono py-5 flex items-center justify-center">
+          NO DATA FOUND
+        </div>:<div className=" h-full overflow-x-auto ">
         <table className="table">
           <thead className="text-white">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -36,6 +39,7 @@ function DataTable({ data, columns }) {
           </tbody>
         </table>
       </div>
+      }
     </>
   );
 }

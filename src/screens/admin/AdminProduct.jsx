@@ -63,7 +63,7 @@ const AdminProduct = () => {
   return (
     <div className=" bg-white h-screen rounded-lg p-6 relative">
       <div className="bg-gray-800 rounded-md container text-white w-ful h-full w-[80vw]">
-      <DataTable data={data} columns={columns} />
+        <DataTable data={data} columns={columns} />
       </div>
       {/* <QRCode value="upi://pay?pa=rejathchandran13-1@okhdfcbank&cu=INR" /> */}
     </div>

@@ -26,13 +26,10 @@ export const SellerRoutes = () => {
         {/* <Route path="auction_sold" element={<SoldAuction />} /> */}
 
         <Route element={<SellerWallet />}>
-           <Route path="settled" element={<SettledWallet/>} /> 
-           <Route path="wallet" element={<SellerWalletTable/>}/>
+          <Route path="settled" element={<SettledWallet />} />
+          <Route path="wallet" element={<SellerWalletTable />} />
         </Route>
 
-        
-        
-        
         <Route path="orders" element={<SellerOrder />} />
       </Route>
     </Routes>

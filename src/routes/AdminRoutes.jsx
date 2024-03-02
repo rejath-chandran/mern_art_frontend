@@ -18,9 +18,9 @@ export const AdminRoutes = () => {
         <Route path="products" element={<AdminProduct />} />
         <Route path="settings" element={<AdminSettings />} />
 
-        <Route  element={<AdminWallet />}>
-             <Route path="wallet" element={<NewWalletTable />} />
-             <Route path="settled" element={<SettledWalletTable/>} />
+        <Route element={<AdminWallet />}>
+          <Route path="wallet" element={<NewWalletTable />} />
+          <Route path="settled" element={<SettledWalletTable />} />
         </Route>
 
         <Route index element={<AdmInDashBoard />} />

@@ -1,4 +1,5 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
+
 import { toast } from "react-toastify";
 import {
   GetAllCategory,
@@ -30,6 +31,10 @@ import {
   DeleteAuction,
   PostSytem,
   GetSytem,
+  PostWalletRqt,
+  GetUserWalletTable,
+  GetADMINWalletTable,
+  PostAdminWalletStatus,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -295,4 +300,36 @@ export function GetSystemDetails() {
     queryKey: ["system-details"],
     queryFn: GetSytem,
   });
+}
+export function GetUserWalletRequest(id) {
+  return useQuery({
+    queryKey: ["user-wallet-request",id],
+    queryFn: GetUserWalletTable,
+  });
+}
+export function GetAdminWalletRequest(id) {
+  return useQuery({
+    queryKey: ["admin-wallet-request",id],
+    queryFn: GetADMINWalletTable,
+  });
+}
+
+
+export function WalletRequest(client){
+  return useMutation({
+    mutationFn:(data)=>PostWalletRqt(data),
+    onSuccess: () => {
+      toast.success("request sucessfull");
+      client.invalidateQueries({ queryKey: ['user-wallet-request'] })
+    },
+  })
+}
+export function AdminWalletChangeStatus(client){
+  return useMutation({
+    mutationFn:(data)=>PostAdminWalletStatus(data),
+    onSuccess: () => {
+      toast.success("changed status");
+      client.invalidateQueries({ queryKey: ['admin-wallet-request'] })
+    },
+  })
 }

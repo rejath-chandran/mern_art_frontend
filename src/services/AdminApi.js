@@ -148,3 +148,19 @@ export const PostSytem = async (data) => {
 export const GetSytem = async () => {
   return (await axioInstance.get("api/system", { headers })).data;
 };
+export const GetUserWalletTable = async ({queryKey}) => {
+  const [_, id] = queryKey
+  return (await axioInstance.get(`api/user_wallet_table?type=${id}`,{ headers })).data;
+};
+
+export const GetADMINWalletTable = async ({queryKey}) => {
+  const [_, id] = queryKey
+  return (await axioInstance.get(`api/admin_wallet_table?type=${id}`,{ headers })).data;
+};
+
+export const PostWalletRqt=async(data)=>{
+  return await axioInstance.post("api/wallet_request",data,{headers})
+}
+export const PostAdminWalletStatus=async(data)=>{
+  return await axioInstance.post("api/change_wallet_status",data,{headers})
+}
