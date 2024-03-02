@@ -7,11 +7,13 @@ import { RiHome4Line } from "react-icons/ri";
 import { BiCategory } from "react-icons/bi";
 import { CiWallet } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
+import { BiSupport } from "react-icons/bi";
 import AnimatedPage from "../../components/AnimatedPage";
+import { FaRegUser } from "react-icons/fa";
 let menu = [
   {
     name: "HOME",
-    path: "users",
+    path: "admin",
     icon: <RiHome4Line className="h-full w-full" />,
   },
   {
@@ -31,13 +33,13 @@ let menu = [
   },
   {
     name: "USERS",
-    path: "products",
-    icon: <CiShoppingCart className="h-full w-full" />,
+    path: "users",
+    icon: <FaRegUser className="h-full w-full" />,
   },
   {
-    name: "CONTACT",
-    path: "products",
-    icon: <CiShoppingCart className="h-full w-full" />,
+    name: "SUPPORT",
+    path: "support",
+    icon: <BiSupport className="h-full w-full" />,
   },
   {
     name: "SETTINGS",

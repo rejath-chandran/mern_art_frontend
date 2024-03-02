@@ -1,25 +1,6 @@
-import React, { useRef, useState } from "react";
-import Header from "../../components/Header";
-import Table from "../../components/Table";
-import EditModal from "../../components/EditModal";
-import { toast } from "react-toastify";
-import QRCode from "react-qr-code";
-import DataTable from "../../components/DataTable";
 
-import {
-  AllCategory,
-  CreateCategory,
-  UpdateCategory,
-  RemoveCategory,
-  AllProduct,
-} from "../../services/AdminQry.js";
-
-import { useQueryClient } from "@tanstack/react-query";
-
-const AdminProduct = () => {
-const client = useQueryClient();
-  
-const prdcts=AllProduct()
+import DataTable from '../../components/DataTable';
+function AdminSupport() {
 
   let columns = [
     {
@@ -86,17 +67,16 @@ const prdcts=AllProduct()
   ];
 
   let data = [{}];
-
   return (
     <div className=" bg-white h-screen rounded-lg p-6 relative">
-      <div className="bg-gray-800 rounded-md container text-white w-ful h-full w-[75vw] overflow-auto">
-        {
-          prdcts.isFetched&&<DataTable data={prdcts.data} columns={columns} />
-        }
-      </div>
-      
+    <div className="bg-gray-800 rounded-md container text-white w-ful h-full w-[75vw] overflow-auto">
+      {
+      <DataTable data={data} columns={columns} />
+      }
     </div>
-  );
-};
+    
+  </div>
+  )
+}
 
-export default AdminProduct;
+export default AdminSupport

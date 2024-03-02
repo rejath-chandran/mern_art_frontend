@@ -35,6 +35,8 @@ import {
   GetUserWalletTable,
   GetADMINWalletTable,
   PostAdminWalletStatus,
+  GetAdminDashboard,
+  GetAllUsers,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -111,6 +113,12 @@ export function AllProduct() {
   return useQuery({
     queryKey: ["all-product"],
     queryFn: GetAllProduct,
+  });
+}
+export function AllApplicationUsers() {
+  return useQuery({
+    queryKey: ["all-users-app"],
+    queryFn: GetAllUsers,
   });
 }
 export function ProductByid(id) {
@@ -303,33 +311,39 @@ export function GetSystemDetails() {
 }
 export function GetUserWalletRequest(id) {
   return useQuery({
-    queryKey: ["user-wallet-request",id],
+    queryKey: ["user-wallet-request", id],
     queryFn: GetUserWalletTable,
   });
 }
 export function GetAdminWalletRequest(id) {
   return useQuery({
-    queryKey: ["admin-wallet-request",id],
+    queryKey: ["admin-wallet-request", id],
     queryFn: GetADMINWalletTable,
   });
 }
 
-
-export function WalletRequest(client){
+export function WalletRequest(client) {
   return useMutation({
-    mutationFn:(data)=>PostWalletRqt(data),
+    mutationFn: (data) => PostWalletRqt(data),
     onSuccess: () => {
       toast.success("request sucessfull");
-      client.invalidateQueries({ queryKey: ['user-wallet-request'] })
+      client.invalidateQueries({ queryKey: ["user-wallet-request"] });
     },
-  })
+  });
 }
-export function AdminWalletChangeStatus(client){
+export function AdminWalletChangeStatus(client) {
   return useMutation({
-    mutationFn:(data)=>PostAdminWalletStatus(data),
+    mutationFn: (data) => PostAdminWalletStatus(data),
     onSuccess: () => {
       toast.success("changed status");
-      client.invalidateQueries({ queryKey: ['admin-wallet-request'] })
+      client.invalidateQueries({ queryKey: ["admin-wallet-request"] });
     },
+  });
+}
+
+export function AdminDashoard(){
+  return useQuery({
+    queryKey:['admin-dash'],
+    queryFn:GetAdminDashboard
   })
 }

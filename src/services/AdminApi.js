@@ -52,6 +52,10 @@ export const GetAllProduct = async () => {
   let data = (await axioInstance.get("api/product", { headers })).data;
   return data;
 };
+export const GetAllUsers = async () => {
+  let data = (await axioInstance.get("api/app_users", { headers })).data;
+  return data;
+};
 export const GetProductbyId = async (key) => {
   let id = key.queryKey[1];
   let data = (await axioInstance.get(`api/product/${id}`, { headers })).data;
@@ -148,19 +152,26 @@ export const PostSytem = async (data) => {
 export const GetSytem = async () => {
   return (await axioInstance.get("api/system", { headers })).data;
 };
-export const GetUserWalletTable = async ({queryKey}) => {
-  const [_, id] = queryKey
-  return (await axioInstance.get(`api/user_wallet_table?type=${id}`,{ headers })).data;
+export const GetUserWalletTable = async ({ queryKey }) => {
+  const [_, id] = queryKey;
+  return (
+    await axioInstance.get(`api/user_wallet_table?type=${id}`, { headers })
+  ).data;
 };
 
-export const GetADMINWalletTable = async ({queryKey}) => {
-  const [_, id] = queryKey
-  return (await axioInstance.get(`api/admin_wallet_table?type=${id}`,{ headers })).data;
+export const GetADMINWalletTable = async ({ queryKey }) => {
+  const [_, id] = queryKey;
+  return (
+    await axioInstance.get(`api/admin_wallet_table?type=${id}`, { headers })
+  ).data;
 };
 
-export const PostWalletRqt=async(data)=>{
-  return await axioInstance.post("api/wallet_request",data,{headers})
-}
-export const PostAdminWalletStatus=async(data)=>{
-  return await axioInstance.post("api/change_wallet_status",data,{headers})
-}
+export const PostWalletRqt = async (data) => {
+  return await axioInstance.post("api/wallet_request", data, { headers });
+};
+export const PostAdminWalletStatus = async (data) => {
+  return await axioInstance.post("api/change_wallet_status", data, { headers });
+};
+export const GetAdminDashboard=async (data) => {
+  return (await axioInstance.get("api/admin_dashboard", { headers })).data;
+};
