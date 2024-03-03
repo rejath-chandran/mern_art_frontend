@@ -1,11 +1,17 @@
 import React from "react";
-import { ProductByid } from "../../services/AdminQry";
+import { GetCommentByid, ProductByid } from "../../services/AdminQry";
 import { useParams } from "react-router";
 import { CartStore } from "../../store";
 import { Link } from "react-router-dom";
 import { StarIcon } from "@heroicons/react/20/solid";
+
 import { CardBody, CardContainer, CardItem } from "../../ui/3d-card";
+import moment from "moment";
+import { Rating } from "@smastrom/react-rating";
 const reviews = [
+  
+
+ 
   {
     id: 1,
     title: "Can't say enough good things",
@@ -18,31 +24,7 @@ const reviews = [
     date: "May 16, 2021",
     datetime: "2021-01-06",
   },
-  {
-    id: 1,
-    title: "Can't say enough good things",
-    rating: 5,
-    content: `
-      <p>I was really pleased with the overall shopping experience. My order even included a little personal, handwritten note, which delighted me!</p>
-      <p>The product quality is amazing, it looks and feel even better than I had anticipated. Brilliant stuff! I would gladly recommend this store to my friends. And, now that I think of it... I actually have, many times!</p>
-    `,
-    author: "Risako M",
-    date: "May 16, 2021",
-    datetime: "2021-01-06",
-  },
-  {
-    id: 1,
-    title: "Can't say enough good things",
-    rating: 5,
-    content: `
-      <p>I was really pleased with the overall shopping experience. My order even included a little personal, handwritten note, which delighted me!</p>
-      <p>The product quality is amazing, it looks and feel even better than I had anticipated. Brilliant stuff! I would gladly recommend this store to my friends. And, now that I think of it... I actually have, many times!</p>
-    `,
-    author: "Risako M",
-    date: "May 16, 2021",
-    datetime: "2021-01-06",
-  },
-  // More reviews...
+
 ];
 
 function classNames(...classes) {
@@ -51,6 +33,7 @@ function classNames(...classes) {
 const Products = () => {
   const { id } = useParams();
   const Item = ProductByid(id);
+  const cmt= GetCommentByid(id)
   const { addTocart, cart } = CartStore();
   const IsinCart = cart.some((item) => item.id == id);
   return (
@@ -146,42 +129,30 @@ const Products = () => {
 
                 <div className="h-[60vh] mt-10 bg-blue-100 p-6 rounded-lg  overflow-auto no-scrollbar">
                   <div className=" ">
-                    {reviews.map((review) => (
+                    {cmt.isLoading?<>loading...</>:<>
+                    {
+                      cmt.data.map(item=>(<>
                       <div
-                        key={review.id}
+                        key={item._id}
                         className="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8"
                       >
                         <div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
                           <div className="flex items-center xl:col-span-1">
                             <div className="flex items-center">
-                              {[0].map((rating) => (
-                                <StarIcon
-                                  key={rating}
-                                  className={classNames(
-                                    review.rating > rating
-                                      ? "text-yellow-400"
-                                      : "text-gray-200",
-                                    "h-5 w-5 flex-shrink-0",
-                                  )}
-                                  aria-hidden="true"
-                                />
-                              ))}
+                            <Rating style={{ maxWidth: 250 }} value={parseInt(item.rating)}  readOnly/>
+
                             </div>
                             <p className="ml-3 text-sm text-gray-700">
-                              {review.rating}
-                              <span className="sr-only"> out of 5 stars</span>
+                              {item.rating}
+                              <span className="font-thin"> out of 5 stars</span>
                             </p>
                           </div>
 
                           <div className="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
-                            <h3 className="text-sm font-medium text-gray-900">
-                              {review.title}
-                            </h3>
-
                             <div
                               className="mt-3 space-y-6 text-sm text-gray-500"
                               dangerouslySetInnerHTML={{
-                                __html: review.content,
+                                __html: item.message,
                               }}
                             />
                           </div>
@@ -189,17 +160,26 @@ const Products = () => {
 
                         <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
                           <p className="font-medium text-gray-900">
-                            {review.author}
+                          {item.user.name}
                           </p>
                           <time
-                            dateTime={review.datetime}
+                            dateTime={item.time}
                             className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0"
                           >
-                            {review.date}
+                            {/* {review.date} */}
+                            {moment(item.time).format('MMMM Do YYYY,')}
                           </time>
                         </div>
                       </div>
-                    ))}
+                      
+                      
+                      
+                      
+                      </>))
+
+
+                    }                    
+                    </>}
                   </div>
                 </div>
               </div>

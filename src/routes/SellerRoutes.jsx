@@ -11,6 +11,11 @@ import AuctionTable from "../components/AuctionTable";
 import AuthChecker from "../components/AuthChecker";
 import SettledWallet from "../screens/seller/SettledWallet";
 import SellerWalletTable from "../screens/seller/SellerWalletTable";
+import OrderScreen from "../screens/seller/OrderScreen";
+import OrderProcess from "../screens/seller/OrderProcess";
+import OrderShipped from "../screens/seller/OrderShipped";
+import OrderRejected from "../screens/seller/OrderRejected";
+import OrderDelivered from "../screens/seller/OrderDelivered";
 export const SellerRoutes = () => {
   return (
     <Routes>
@@ -30,7 +35,16 @@ export const SellerRoutes = () => {
           <Route path="wallet" element={<SellerWalletTable />} />
         </Route>
 
-        <Route path="orders" element={<SellerOrder />} />
+        
+
+        <Route element={<OrderScreen/>} >
+           <Route path="orders" element={<SellerOrder />} />
+           <Route path="process_order" element={<OrderProcess />} />
+           <Route path="shipped_order" element={<OrderShipped />} />
+           <Route path="rejected_order" element={<OrderRejected />} />
+           <Route path="delivered_order" element={<OrderDelivered />} />
+        </Route>
+
       </Route>
     </Routes>
   );

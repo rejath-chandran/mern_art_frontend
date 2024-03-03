@@ -37,6 +37,11 @@ import {
   PostAdminWalletStatus,
   GetAdminDashboard,
   GetAllUsers,
+  PostMakeSupport,
+  DeleteMakeSupport,
+  GetAllMakeSupport,
+  GetAllComment,
+  PostComment,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -341,9 +346,46 @@ export function AdminWalletChangeStatus(client) {
   });
 }
 
-export function AdminDashoard(){
+export function AdminDashoard() {
   return useQuery({
-    queryKey:['admin-dash'],
-    queryFn:GetAdminDashboard
+    queryKey: ["admin-dash"],
+    queryFn: GetAdminDashboard,
+  });
+}
+
+export function UserMakeSupport(){
+  return useMutation({
+    mutationFn:(data)=>PostMakeSupport(data)
+  })
+}
+
+export function AdminDeleteSupport(client){
+return useMutation({
+   mutationFn:(data)=>DeleteMakeSupport(data),
+   onSuccess:()=>{
+    client.invalidateQueries({ queryKey: ["all-support"] });
+   }
+})
+}
+
+export function AdminAllSupport(){
+return useQuery({
+queryKey:['all-support'],
+queryFn:GetAllMakeSupport 
+})
+}
+
+export function GetCommentByid(id){
+  return useQuery(
+    {
+      queryKey:['all-comment',id],
+      queryFn:GetAllComment
+
+    }
+  )
+}
+export function MakeCommentbyUser(){
+  return useMutation({
+   mutationFn:(data)=>PostComment(data)
   })
 }

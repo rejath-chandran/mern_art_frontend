@@ -1,7 +1,10 @@
-
-import DataTable from '../../components/DataTable';
+import { useQueryClient } from "@tanstack/react-query";
+import DataTable from "../../components/DataTable";
+import { AdminAllSupport, AdminDeleteSupport } from "../../services/AdminQry";
 function AdminSupport() {
-
+  const client=useQueryClient()
+  const support=AdminAllSupport()
+  const support_delete=AdminDeleteSupport(client)
   let columns = [
     {
       accessorKey: "_id",
@@ -9,74 +12,36 @@ function AdminSupport() {
       cell: (props) => <p>{props.getValue()}</p>,
     },
     {
-      accessorKey: "name",
-      header: "name",
-      cell: (props) => (
-        <p>
-          {props.getValue()}
-        </p>
-      ),
+      accessorKey: "email",
+      header: "email",
+      cell: (props) => <p>{props.getValue()}</p>,
     },
     {
-      accessorKey: "image",
-      header: "image",
-      cell: (props) => (
-        <div className="avatar">
-  <div className="w-24 rounded">
-    <img src={props.getValue()} />
-  </div>
-</div>
-      ),
+      accessorKey: "messsage",
+      header: "message",
+      cell: (props) => <p>{props.getValue()}</p>,
     },
     {
-      accessorKey: "desc",
-      header: "desc",
-      cell: (props) => (
-        <p>
-          {props.getValue()}
-        </p>
-      ),
+      accessorKey: "",
+      header: "action",
+      cell: (props) => <>
+      <button className="btn btn-error"
+      onClick={()=>support_delete.mutate({"id":props.row.original._id})}
+      >DELETE</button>
+      </>,
     },
-    {
-      accessorKey: "category",
-      header: "category",
-      cell: (props) => (
-        <p>
-          {props.getValue()}
-        </p>
-      ),
-    },
-    {
-      accessorKey: "artist",
-      header: "artist",
-      cell: (props) => (
-        <p>
-          {props.getValue()}
-        </p>
-      ),
-    },
-    {
-      accessorKey: "price",
-      header: "price",
-      cell: (props) => (
-        <p>
-          {props.getValue()}
-        </p>
-      ),
-    },
+   
+    
   ];
 
   let data = [{}];
   return (
     <div className=" bg-white h-screen rounded-lg p-6 relative">
-    <div className="bg-gray-800 rounded-md container text-white w-ful h-full w-[75vw] overflow-auto">
-      {
-      <DataTable data={data} columns={columns} />
-      }
+      <div className="bg-gray-800 rounded-md container text-white w-ful h-full w-[75vw] overflow-auto">
+        {support.isFetched&&<DataTable data={support.data} columns={columns} />}
+      </div>
     </div>
-    
-  </div>
-  )
+  );
 }
 
-export default AdminSupport
+export default AdminSupport;

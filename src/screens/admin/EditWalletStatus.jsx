@@ -40,7 +40,9 @@ function EditWalletStatus({ data }) {
                     <span className="label text-slate-600 font-bold">
                       AMOUNT: {parseInt(data.withdraw) - parseInt(data.amount)}
                     </span>
-                    <QRCode value={`upi://pay?pa=${data.upi}&cu=INR&am=${parseInt(data.withdraw) - parseInt(data.amount)}`} />
+                    <QRCode
+                      value={`upi://pay?pa=${data.upi}&cu=INR&am=${parseInt(data.withdraw) - parseInt(data.amount)}`}
+                    />
                     <button
                       className="btn btn-secondary mt-2 w-full"
                       onClick={() => Submit(data._id)}

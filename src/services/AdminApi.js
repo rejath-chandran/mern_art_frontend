@@ -172,6 +172,24 @@ export const PostWalletRqt = async (data) => {
 export const PostAdminWalletStatus = async (data) => {
   return await axioInstance.post("api/change_wallet_status", data, { headers });
 };
-export const GetAdminDashboard=async (data) => {
+export const GetAdminDashboard = async (data) => {
   return (await axioInstance.get("api/admin_dashboard", { headers })).data;
+};
+
+export const PostMakeSupport = async (data) => {
+  return (await axioInstance.post("api/create_support",data, { headers }))
+};
+export const DeleteMakeSupport = async (data) => {
+  return (await axioInstance.post("api/delete_support",data,{ headers }))
+};
+export const GetAllMakeSupport = async (data) => {
+  return ((await axioInstance.get("api/support",{ headers })).data)
+};
+
+export const GetAllComment = async ({queryKey}) => {
+  const [_,id]=queryKey
+  return ((await axioInstance.get(`api/get_comment/${id}`,{ headers })).data)
+};
+export const PostComment= async (data) => {
+  return (await axioInstance.post("api/make_comment",data,{ headers }))
 };

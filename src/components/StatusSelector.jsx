@@ -2,12 +2,27 @@ import React from "react";
 import { PostOrderUpdate } from "../services/AdminQry";
 import { useQueryClient } from "@tanstack/react-query";
 
-let options = ["delivered", "cancelled", "processing"];
-
+let options = ["processing", "shipped", "rejected", "delivered"];
+function select_options(val){
+ if(val==="placed"){
+  return ["processing","rejected"]
+ }
+ else if(val==="processing"){
+ return ["shipped"]
+ }
+ else if(val==="shipped"){
+ return ["delivered"]
+ }
+ else{
+  return []
+ }
+}
 function StatusSelector({ getValue, orderId }) {
   const client = useQueryClient();
   const { mutate } = PostOrderUpdate(client);
-  let newoptions = options.filter((i) => i !== getValue);
+  // let newoptions = options.filter((i) => i !== getValue);
+  let newoptions = select_options(getValue)
+
   return (
     <select
       className="select select-info w-full max-w-xs bg-green-400 text-white"

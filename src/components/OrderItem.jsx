@@ -1,11 +1,18 @@
-import React, { useRef } from "react";
+import React, { useRef,useState } from "react";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+import { Rating } from '@smastrom/react-rating'
+import {MakeCommentbyUser} from "../services/AdminQry"
+import '@smastrom/react-rating/style.css'
+
 export default function OrderItem({ product }) {
+  const comment=MakeCommentbyUser()
+  const [rating, setRating] = useState(5)
   const ratingRef = useRef(5);
   const ReviewRef = useRef("");
 
+  
   const OrderSteps = (status) => {
     if (status === "placed") {
       return 0;
@@ -13,7 +20,10 @@ export default function OrderItem({ product }) {
       return 1;
     } else if (status === "shipped") {
       return 2;
-    } else return 4;
+    }else if(status === "delivered"){
+      return 4
+    }
+    else return 5;
   };
   const Ischecked = (e, value) => {
     if (e.target.checked) {
@@ -21,48 +31,31 @@ export default function OrderItem({ product }) {
     }
   };
   const SubmitReview = () => {
-    console.log(ratingRef.current, ReviewRef.current);
+    
+    let data={
+      message:ReviewRef.current.value,
+      rating:rating,
+      product:product.product._id
+    }
+    console.log(data)
+    comment.mutate(data)
+
+    ReviewRef.current.value=''
+
   };
 
   return (
     <div className="relative">
+
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg my-3 text-black">REVIEW</h3>
-          <div className="rating my-2 mb-5">
-            <input
-              type="radio"
-              onChange={(e) => Ischecked(e, 1)}
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              onChange={(e) => Ischecked(e, 2)}
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-              checked
-            />
-            <input
-              type="radio"
-              onChange={(e) => Ischecked(e, 3)}
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              onChange={(e) => Ischecked(e, 4)}
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
-            <input
-              type="radio"
-              onChange={(e) => Ischecked(e, 5)}
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-            />
+          <div className="my-2">
+          <Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} />
           </div>
           <textarea
+          ref={ReviewRef}
+            // onChange={e=>ReviewRef.current=e.target.value}
             className="textarea textarea-bordered w-full"
             placeholder="write something"
           ></textarea>
@@ -70,7 +63,6 @@ export default function OrderItem({ product }) {
             className="btn py-3 bg-black text-white"
             onClick={() => {
               document.getElementById("my_modal_2").close();
-
               SubmitReview();
             }}
           >
@@ -116,6 +108,7 @@ export default function OrderItem({ product }) {
                   <span className="block">{product.adress}</span>
                 </dd>
               </div>
+              {product.status==="delivered"&&<>
               <div>
                 <dd className="mt-3 space-y-3 text-gray-500">
                   <button
@@ -128,11 +121,13 @@ export default function OrderItem({ product }) {
                   </button>
                 </dd>
               </div>
+              
+              </>}
             </dl>
           </div>
         </div>
 
-        {4 != OrderSteps(product.status) ? (
+        {5!= OrderSteps(product.status) ? (
           <>
             <div className="border-t border-gray-200 px-4 py-6 sm:px-6 lg:p-8">
               <h4 className="sr-only">Status</h4>

@@ -31,11 +31,6 @@ let menu = [
     path: "/seller/orders",
     icon: <CiBoxList className="h-full w-full" />,
   },
-  {
-    name: "ACCOUNT",
-    path: "/seller/orders",
-    icon: <RiAccountCircleLine className="h-full w-full" />,
-  },
 ];
 
 const AdminLayout = () => {

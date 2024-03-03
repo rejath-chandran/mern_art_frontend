@@ -9,7 +9,7 @@ import AdminWallet from "../screens/admin/AdminWallet";
 import NewWalletTable from "../screens/admin/NewWalletTable";
 import SettledWalletTable from "../screens/admin/SettledWalletTable";
 import AdminUser from "../screens/admin/AdminUser";
-import AdminSupport from "../screens/admin/AdminSupport"
+import AdminSupport from "../screens/admin/AdminSupport";
 export const AdminRoutes = () => {
   return (
     <Routes>
@@ -18,8 +18,8 @@ export const AdminRoutes = () => {
         <Route path="category" element={<AdminCategory />} />
         <Route path="products" element={<AdminProduct />} />
         {/* <Route path="home" element={<AdmInDashBoard/>} /> */}
-        <Route path="users" element={<AdminUser/>} />
-        <Route path="support" element={<AdminSupport/>} />
+        <Route path="users" element={<AdminUser />} />
+        <Route path="support" element={<AdminSupport />} />
         <Route path="settings" element={<AdminSettings />} />
 
         <Route element={<AdminWallet />}>
