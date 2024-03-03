@@ -9,9 +9,6 @@ import { CardBody, CardContainer, CardItem } from "../../ui/3d-card";
 import moment from "moment";
 import { Rating } from "@smastrom/react-rating";
 const reviews = [
-  
-
- 
   {
     id: 1,
     title: "Can't say enough good things",
@@ -24,7 +21,6 @@ const reviews = [
     date: "May 16, 2021",
     datetime: "2021-01-06",
   },
-
 ];
 
 function classNames(...classes) {
@@ -33,7 +29,7 @@ function classNames(...classes) {
 const Products = () => {
   const { id } = useParams();
   const Item = ProductByid(id);
-  const cmt= GetCommentByid(id)
+  const cmt = GetCommentByid(id);
   const { addTocart, cart } = CartStore();
   const IsinCart = cart.some((item) => item.id == id);
   return (
@@ -129,57 +125,61 @@ const Products = () => {
 
                 <div className="h-[60vh] mt-10 bg-blue-100 p-6 rounded-lg  overflow-auto no-scrollbar">
                   <div className=" ">
-                    {cmt.isLoading?<>loading...</>:<>
-                    {
-                      cmt.data.map(item=>(<>
-                      <div
-                        key={item._id}
-                        className="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8"
-                      >
-                        <div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
-                          <div className="flex items-center xl:col-span-1">
-                            <div className="flex items-center">
-                            <Rating style={{ maxWidth: 250 }} value={parseInt(item.rating)}  readOnly/>
-
-                            </div>
-                            <p className="ml-3 text-sm text-gray-700">
-                              {item.rating}
-                              <span className="font-thin"> out of 5 stars</span>
-                            </p>
-                          </div>
-
-                          <div className="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
+                    {cmt.isLoading ? (
+                      <>loading...</>
+                    ) : (
+                      <>
+                        {cmt.data.map((item) => (
+                          <>
                             <div
-                              className="mt-3 space-y-6 text-sm text-gray-500"
-                              dangerouslySetInnerHTML={{
-                                __html: item.message,
-                              }}
-                            />
-                          </div>
-                        </div>
+                              key={item._id}
+                              className="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8"
+                            >
+                              <div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
+                                <div className="flex items-center xl:col-span-1">
+                                  <div className="flex items-center">
+                                    <Rating
+                                      style={{ maxWidth: 250 }}
+                                      value={parseInt(item.rating)}
+                                      readOnly
+                                    />
+                                  </div>
+                                  <p className="ml-3 text-sm text-gray-700">
+                                    {item.rating}
+                                    <span className="font-thin">
+                                      {" "}
+                                      out of 5 stars
+                                    </span>
+                                  </p>
+                                </div>
 
-                        <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
-                          <p className="font-medium text-gray-900">
-                          {item.user.name}
-                          </p>
-                          <time
-                            dateTime={item.time}
-                            className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0"
-                          >
-                            {/* {review.date} */}
-                            {moment(item.time).format('MMMM Do YYYY,')}
-                          </time>
-                        </div>
-                      </div>
-                      
-                      
-                      
-                      
-                      </>))
+                                <div className="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
+                                  <div
+                                    className="mt-3 space-y-6 text-sm text-gray-500"
+                                    dangerouslySetInnerHTML={{
+                                      __html: item.message,
+                                    }}
+                                  />
+                                </div>
+                              </div>
 
-
-                    }                    
-                    </>}
+                              <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
+                                <p className="font-medium text-gray-900">
+                                  {item.user.name}
+                                </p>
+                                <time
+                                  dateTime={item.time}
+                                  className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0"
+                                >
+                                  {/* {review.date} */}
+                                  {moment(item.time).format("MMMM Do YYYY,")}
+                                </time>
+                              </div>
+                            </div>
+                          </>
+                        ))}
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

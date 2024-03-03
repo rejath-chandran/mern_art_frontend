@@ -48,6 +48,10 @@ export const GetProductByArtist = async (key) => {
   return data;
 };
 
+export const GetProductbyAristSeller = async () => {
+  return (await axioInstance.get(`api/artist_product`, { headers })).data;
+};
+
 export const GetAllProduct = async () => {
   let data = (await axioInstance.get("api/product", { headers })).data;
   return data;
@@ -177,19 +181,19 @@ export const GetAdminDashboard = async (data) => {
 };
 
 export const PostMakeSupport = async (data) => {
-  return (await axioInstance.post("api/create_support",data, { headers }))
+  return await axioInstance.post("api/create_support", data, { headers });
 };
 export const DeleteMakeSupport = async (data) => {
-  return (await axioInstance.post("api/delete_support",data,{ headers }))
+  return await axioInstance.post("api/delete_support", data, { headers });
 };
 export const GetAllMakeSupport = async (data) => {
-  return ((await axioInstance.get("api/support",{ headers })).data)
+  return (await axioInstance.get("api/support", { headers })).data;
 };
 
-export const GetAllComment = async ({queryKey}) => {
-  const [_,id]=queryKey
-  return ((await axioInstance.get(`api/get_comment/${id}`,{ headers })).data)
+export const GetAllComment = async ({ queryKey }) => {
+  const [_, id] = queryKey;
+  return (await axioInstance.get(`api/get_comment/${id}`, { headers })).data;
 };
-export const PostComment= async (data) => {
-  return (await axioInstance.post("api/make_comment",data,{ headers }))
+export const PostComment = async (data) => {
+  return await axioInstance.post("api/make_comment", data, { headers });
 };

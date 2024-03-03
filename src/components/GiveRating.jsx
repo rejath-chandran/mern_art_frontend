@@ -1,8 +1,5 @@
-
 const GiveRating = () => {
-  return (
-    <div>GiveRating</div>
-  )
-}
+  return <div>GiveRating</div>;
+};
 
-export default GiveRating
+export default GiveRating;

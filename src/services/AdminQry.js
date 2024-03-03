@@ -42,6 +42,7 @@ import {
   GetAllMakeSupport,
   GetAllComment,
   PostComment,
+  GetProductbyAristSeller,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -103,6 +104,12 @@ export function AllProductByArtist(id) {
     queryFn: GetProductByArtist,
   });
 }
+export function AllSellerProducts() {
+  return useQuery({
+    queryKey: ["all-product-artist-seller"],
+    queryFn: GetProductbyAristSeller,
+  });
+}
 
 export function CreateProduct(client) {
   return useMutation({
@@ -120,6 +127,7 @@ export function AllProduct() {
     queryFn: GetAllProduct,
   });
 }
+
 export function AllApplicationUsers() {
   return useQuery({
     queryKey: ["all-users-app"],
@@ -353,39 +361,36 @@ export function AdminDashoard() {
   });
 }
 
-export function UserMakeSupport(){
+export function UserMakeSupport() {
   return useMutation({
-    mutationFn:(data)=>PostMakeSupport(data)
-  })
+    mutationFn: (data) => PostMakeSupport(data),
+  });
 }
 
-export function AdminDeleteSupport(client){
-return useMutation({
-   mutationFn:(data)=>DeleteMakeSupport(data),
-   onSuccess:()=>{
-    client.invalidateQueries({ queryKey: ["all-support"] });
-   }
-})
-}
-
-export function AdminAllSupport(){
-return useQuery({
-queryKey:['all-support'],
-queryFn:GetAllMakeSupport 
-})
-}
-
-export function GetCommentByid(id){
-  return useQuery(
-    {
-      queryKey:['all-comment',id],
-      queryFn:GetAllComment
-
-    }
-  )
-}
-export function MakeCommentbyUser(){
+export function AdminDeleteSupport(client) {
   return useMutation({
-   mutationFn:(data)=>PostComment(data)
-  })
+    mutationFn: (data) => DeleteMakeSupport(data),
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ["all-support"] });
+    },
+  });
+}
+
+export function AdminAllSupport() {
+  return useQuery({
+    queryKey: ["all-support"],
+    queryFn: GetAllMakeSupport,
+  });
+}
+
+export function GetCommentByid(id) {
+  return useQuery({
+    queryKey: ["all-comment", id],
+    queryFn: GetAllComment,
+  });
+}
+export function MakeCommentbyUser() {
+  return useMutation({
+    mutationFn: (data) => PostComment(data),
+  });
 }

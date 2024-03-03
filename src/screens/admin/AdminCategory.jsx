@@ -56,13 +56,15 @@ const AdminCategory = () => {
     {
       accessorKey: "image",
       header: "image",
-      cell: (props) => <>
-      <div className="avatar">
-  <div className="w-24 rounded">
-    <img src={props.getValue()} />
-  </div>
-</div>
-      </>,
+      cell: (props) => (
+        <>
+          <div className="avatar">
+            <div className="w-24 rounded">
+              <img src={props.getValue()} />
+            </div>
+          </div>
+        </>
+      ),
     },
     {
       accessorKey: "desc",
@@ -72,25 +74,29 @@ const AdminCategory = () => {
     {
       accessorKey: "",
       header: "action",
-      cell: (props) => <div className="flex">
-      <AdminEditCategory  data={props.row.original} edit={EditSubmit}/>
-      <button className="btn btn-error"
-      onClick={()=>Deletecat(props.row.original._id)}
-      >DELETE</button>
-      </div>,
+      cell: (props) => (
+        <div className="flex">
+          <AdminEditCategory data={props.row.original} edit={EditSubmit} />
+          <button
+            className="btn btn-error"
+            onClick={() => Deletecat(props.row.original._id)}
+          >
+            DELETE
+          </button>
+        </div>
+      ),
     },
-   
-    
   ];
-  
+
   return (
     <div className=" bg-white h-[100%] p-6 relative">
-      
-      <AddCategory create={CreateSubmit}/>
+      <AddCategory create={CreateSubmit} />
       <div className="bg-gray-800 mt-5 rounded-md container text-white w-ful  w-[75vw] h-[85vh] overflow-y-auto">
-        {isLoading?<>loading..</>:
-        <DataTable data={data} columns={columns} />
-        }
+        {isLoading ? (
+          <>loading..</>
+        ) : (
+          <DataTable data={data} columns={columns} />
+        )}
       </div>
     </div>
   );

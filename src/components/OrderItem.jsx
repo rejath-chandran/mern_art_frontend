@@ -1,18 +1,17 @@
-import React, { useRef,useState } from "react";
+import React, { useRef, useState } from "react";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-import { Rating } from '@smastrom/react-rating'
-import {MakeCommentbyUser} from "../services/AdminQry"
-import '@smastrom/react-rating/style.css'
+import { Rating } from "@smastrom/react-rating";
+import { MakeCommentbyUser } from "../services/AdminQry";
+import "@smastrom/react-rating/style.css";
 
 export default function OrderItem({ product }) {
-  const comment=MakeCommentbyUser()
-  const [rating, setRating] = useState(5)
+  const comment = MakeCommentbyUser();
+  const [rating, setRating] = useState(5);
   const ratingRef = useRef(5);
   const ReviewRef = useRef("");
 
-  
   const OrderSteps = (status) => {
     if (status === "placed") {
       return 0;
@@ -20,10 +19,9 @@ export default function OrderItem({ product }) {
       return 1;
     } else if (status === "shipped") {
       return 2;
-    }else if(status === "delivered"){
-      return 4
-    }
-    else return 5;
+    } else if (status === "delivered") {
+      return 4;
+    } else return 5;
   };
   const Ischecked = (e, value) => {
     if (e.target.checked) {
@@ -31,30 +29,31 @@ export default function OrderItem({ product }) {
     }
   };
   const SubmitReview = () => {
-    
-    let data={
-      message:ReviewRef.current.value,
-      rating:rating,
-      product:product.product._id
-    }
-    console.log(data)
-    comment.mutate(data)
+    let data = {
+      message: ReviewRef.current.value,
+      rating: rating,
+      product: product.product._id,
+    };
+    console.log(data);
+    comment.mutate(data);
 
-    ReviewRef.current.value=''
-
+    ReviewRef.current.value = "";
   };
 
   return (
     <div className="relative">
-
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg my-3 text-black">REVIEW</h3>
           <div className="my-2">
-          <Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} />
+            <Rating
+              style={{ maxWidth: 250 }}
+              value={rating}
+              onChange={setRating}
+            />
           </div>
           <textarea
-          ref={ReviewRef}
+            ref={ReviewRef}
             // onChange={e=>ReviewRef.current=e.target.value}
             className="textarea textarea-bordered w-full"
             placeholder="write something"
@@ -92,7 +91,7 @@ export default function OrderItem({ product }) {
                 <a>{product.product.name}</a>
               </h3>
               <p className="mt-2 text-sm font-medium text-gray-900">
-                ${product.product.price}
+                ₹{product.product.price}
               </p>
               <p className="mt-3 text-sm text-gray-500">
                 {product.product.desc}
@@ -108,26 +107,27 @@ export default function OrderItem({ product }) {
                   <span className="block">{product.adress}</span>
                 </dd>
               </div>
-              {product.status==="delivered"&&<>
-              <div>
-                <dd className="mt-3 space-y-3 text-gray-500">
-                  <button
-                    className="btn"
-                    onClick={() =>
-                      document.getElementById("my_modal_2").showModal()
-                    }
-                  >
-                    Give Ratings
-                  </button>
-                </dd>
-              </div>
-              
-              </>}
+              {product.status === "delivered" && (
+                <>
+                  <div>
+                    <dd className="mt-3 space-y-3 text-gray-500">
+                      <button
+                        className="btn"
+                        onClick={() =>
+                          document.getElementById("my_modal_2").showModal()
+                        }
+                      >
+                        Give Ratings
+                      </button>
+                    </dd>
+                  </div>
+                </>
+              )}
             </dl>
           </div>
         </div>
 
-        {5!= OrderSteps(product.status) ? (
+        {5 != OrderSteps(product.status) ? (
           <>
             <div className="border-t border-gray-200 px-4 py-6 sm:px-6 lg:p-8">
               <h4 className="sr-only">Status</h4>

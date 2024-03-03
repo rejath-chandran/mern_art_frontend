@@ -35,16 +35,13 @@ export const SellerRoutes = () => {
           <Route path="wallet" element={<SellerWalletTable />} />
         </Route>
 
-        
-
-        <Route element={<OrderScreen/>} >
-           <Route path="orders" element={<SellerOrder />} />
-           <Route path="process_order" element={<OrderProcess />} />
-           <Route path="shipped_order" element={<OrderShipped />} />
-           <Route path="rejected_order" element={<OrderRejected />} />
-           <Route path="delivered_order" element={<OrderDelivered />} />
+        <Route element={<OrderScreen />}>
+          <Route path="orders" element={<SellerOrder />} />
+          <Route path="process_order" element={<OrderProcess />} />
+          <Route path="shipped_order" element={<OrderShipped />} />
+          <Route path="rejected_order" element={<OrderRejected />} />
+          <Route path="delivered_order" element={<OrderDelivered />} />
         </Route>
-
       </Route>
     </Routes>
   );

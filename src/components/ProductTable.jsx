@@ -6,6 +6,7 @@ import {
 import {
   AllAuction,
   AllProduct,
+  AllSellerProducts,
   DeleteSellerAuction,
 } from "../services/AdminQry";
 import { useQueryClient } from "@tanstack/react-query";
@@ -15,7 +16,7 @@ import EditProduct from "./EditProduct";
 
 function ProductTable({ DeleteSubmit, EditSubmit, category_list }) {
   const client = useQueryClient();
-  const { data, isLoading } = AllProduct();
+  const { data, isLoading } = AllSellerProducts();
 
   let columns = [
     {
