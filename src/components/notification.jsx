@@ -53,7 +53,13 @@ function Notification({ toggleDropdown, isDropdownOpen, dropdownRef }) {
                 <div
                   key={notification.id}
                   className="cursor-pointer  p-2 border-4"
-                  onClick={() => nav(`/item/${notification.id}`)}
+                  onClick={() =>{
+                    if(notification.type=="product"){
+                      return nav(`/item/${notification.id}`)
+                    }else{
+                      return nav(`/auction/${notification.id}`)
+                    }
+                  }}
                 >
                   {console.log("hey", notification)}
                   <div className="text-sm text-black font-semibold">

@@ -8,16 +8,20 @@ const SearchPage = () => {
     <>
     <div className="text-xl ml-12 pl-12 mt-6">
      SEARCH RESULT FOR {value?.toUpperCase() ?? ""}
+     <>{
+        products?.data?.length==0?<span className="mx-2">0 item found</span>:
+        <span className="mx-2">{products?.data?.length??0} item found</span>
+    }
+    </>
     </div>
     {
-        products.isLoading?<>loading...</>:<>
-        <div className="m-12 container mx-auto grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-      {products.data.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </div>
-        
-        </>
+    products.isLoading?<>loading...</>:
+    <>
+    
+    <div className="m-12 container mx-auto grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+    {products.data.map(item=><ProductCard product={item}/>)}
+     </div>
+    </>
     }
   </>
   )

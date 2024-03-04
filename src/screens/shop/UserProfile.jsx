@@ -20,7 +20,7 @@ const UserProfile = () => {
   const [img, Setimg] = useState(null);
 
   const [edit, SetEdit] = useState(false);
-  const seller = UserToSeller();
+  const seller = UserToSeller(client);
   const account = GetUserAcccountDetails();
   const update = UpdateAccountDetails(client);
 

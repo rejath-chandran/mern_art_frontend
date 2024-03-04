@@ -51,7 +51,7 @@ const ShopeRoutes = () => {
             path="search/:value"
             element={
               <AnimatedPage>
-                <SearchPage/>
+                <SearchPage />
               </AnimatedPage>
             }
           />

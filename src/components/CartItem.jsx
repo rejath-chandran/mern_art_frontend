@@ -10,9 +10,7 @@ const CartItem = ({ item, onRemove, Checkout }) => {
         {Checkout ? (
           <></>
         ) : (
-          <>
-            {/* <p className="text-gray-600">{item.description}</p> */}
-          </>
+          <>{/* <p className="text-gray-600">{item.description}</p> */}</>
         )}
       </div>
       <div className="flex items-center">

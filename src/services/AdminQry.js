@@ -313,11 +313,12 @@ export function PostOrderUpdate(client) {
   });
 }
 //account
-export function UserToSeller() {
+export function UserToSeller(client) {
   return useMutation({
     mutationFn: () => PostMakeasSeller(),
     onSuccess: () => {
       toast.success("Now You're Seller too!!!");
+      client.invalidateQueries({ queryKey: ["user-account-details"] });
     },
     onError: (error) => {
       console.log(error);
@@ -329,7 +330,7 @@ export function PostSystemDetail() {
   return useMutation({
     mutationFn: (data) => PostSytem(data),
     onSuccess: () => {
-      toast.success("Now You're Seller too!!!");
+      toast.success("Updated!!!");
     },
   });
 }
@@ -359,6 +360,9 @@ export function WalletRequest(client) {
       toast.success("request sucessfull");
       client.invalidateQueries({ queryKey: ["user-wallet-request"] });
     },
+    onError:() => {
+      toast.error("request amount greater than wallet balance");
+    }
   });
 }
 export function AdminWalletChangeStatus(client) {
@@ -424,7 +428,7 @@ export function GetUserAcccountDetails() {
 }
 export function GetUserSearchProducts(item) {
   return useQuery({
-    queryKey: ["user-search-product",item],
+    queryKey: ["user-search-product", item],
     queryFn: GetshopSearch,
   });
 }
