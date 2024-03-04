@@ -3,7 +3,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { AllAuction, DeleteSellerAuction } from "../services/AdminQry";
+import { AllAuction, AllAuctionSeller, DeleteSellerAuction } from "../services/AdminQry";
 import { useQueryClient } from "@tanstack/react-query";
 import Countdown from "react-countdown";
 import CountDownTimer from "./CountDownTimer";
@@ -11,7 +11,7 @@ import CountDownTimer from "./CountDownTimer";
 function AuctionTable() {
   const client = useQueryClient();
 
-  const { data, isLoading } = AllAuction();
+  const { data, isLoading } = AllAuctionSeller();
   const DeleteAuction = DeleteSellerAuction(client);
 
   let columns = [

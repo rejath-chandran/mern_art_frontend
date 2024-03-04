@@ -8,20 +8,20 @@ import { StarIcon } from "@heroicons/react/20/solid";
 import { CardBody, CardContainer, CardItem } from "../../ui/3d-card";
 import moment from "moment";
 import { Rating } from "@smastrom/react-rating";
-const reviews = [
-  {
-    id: 1,
-    title: "Can't say enough good things",
-    rating: 5,
-    content: `
-      <p>I was really pleased with the overall shopping experience. My order even included a little personal, handwritten note, which delighted me!</p>
-      <p>The product quality is amazing, it looks and feel even better than I had anticipated. Brilliant stuff! I would gladly recommend this store to my friends. And, now that I think of it... I actually have, many times!</p>
-    `,
-    author: "Risako M",
-    date: "May 16, 2021",
-    datetime: "2021-01-06",
-  },
-];
+// const reviews = [
+//   {
+//     id: 1,
+//     title: "Can't say enough good things",
+//     rating: 5,
+//     content: `
+//       <p>I was really pleased with the overall shopping experience. My order even included a little personal, handwritten note, which delighted me!</p>
+//       <p>The product quality is amazing, it looks and feel even better than I had anticipated. Brilliant stuff! I would gladly recommend this store to my friends. And, now that I think of it... I actually have, many times!</p>
+//     `,
+//     author: "Risako M",
+//     date: "May 16, 2021",
+//     datetime: "2021-01-06",
+//   },
+// ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -129,7 +129,9 @@ const Products = () => {
                       <>loading...</>
                     ) : (
                       <>
-                        {cmt.data.map((item) => (
+                        {
+                          cmt.data.length==0?<h1 className="text-xl font-bold">no comment found!!</h1>:<>
+                          {cmt.data.map((item) => (
                           <>
                             <div
                               key={item._id}
@@ -178,6 +180,10 @@ const Products = () => {
                             </div>
                           </>
                         ))}
+                          
+                          
+                          </>
+                        }
                       </>
                     )}
                   </div>

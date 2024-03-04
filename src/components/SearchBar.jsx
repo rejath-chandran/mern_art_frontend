@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { SearchStore } from "../store";
 import { useRef } from "react";
+import { useNavigate } from "react-router";
 // import { motion } from "framer-motion"
 
 function SearchBar() {
+  const nav=useNavigate()
   const { visible, close } = SearchStore();
   const dropdownRef = useRef();
-
+  const SearchRef=useRef('')
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       close();
@@ -15,7 +17,17 @@ function SearchBar() {
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
+
+
   }, []);
+
+  const FinalSubmit=(e)=>{
+   e.preventDefault();
+
+   nav(`/category/${SearchRef.current.value}`)
+   SearchRef.current.value=''
+   close()
+  }
   return (
     <div
       className={`${visible ? "" : "hidden"} absolute bg-white opacity-95 inset-0 z-40`}
@@ -23,7 +35,7 @@ function SearchBar() {
       <div className="flex justify-center ">
         <div class="mt-32 opacity-90 relative p-4 w-full max-w-2xl max-h-full">
           <div ref={dropdownRef} class="relative bg-white rounded-lg shadow ">
-            <form>
+            <form onSubmit={FinalSubmit}>
               <div class="relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                   <svg
@@ -43,6 +55,7 @@ function SearchBar() {
                   </svg>
                 </div>
                 <input
+                  ref={SearchRef}
                   type="search"
                   id="default-search"
                   class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "

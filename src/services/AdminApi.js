@@ -87,6 +87,15 @@ export const GetAllAuction = async () => {
   let data = (await axioInstance.get("api/auction", { headers })).data;
   return data;
 };
+export const GetAllAuctionForSeller = async () => {
+  let data = (await axioInstance.get("api/auction_seller", { headers })).data;
+  return data;
+};
+export const GetAllAuctionForSellerSold = async () => {
+  let data = (await axioInstance.get("api/auction_seller_sold", { headers })).data;
+  return data;
+};
+
 export const GetAuctionByID = async (key) => {
   let id = key.queryKey[1];
   let data = (await axioInstance.get(`api/auction/item/${id}`, { headers }))
@@ -196,4 +205,14 @@ export const GetAllComment = async ({ queryKey }) => {
 };
 export const PostComment = async (data) => {
   return await axioInstance.post("api/make_comment", data, { headers });
+};
+
+
+export const PostAccountDetails = async (data) => {
+  return await axioInstance.post("api/account_details", data, { headers });
+};
+
+export const GetUserAccountDetailsByid = async ({ queryKey }) => {
+  // const [_, id] = queryKey;
+  return (await axioInstance.get(`api/account_details`, { headers })).data;
 };

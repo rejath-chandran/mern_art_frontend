@@ -1,26 +1,34 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useParams } from "react-router";
 import { AuctionByID, BidByID, CreateBid } from "../../services/AdminQry";
 import { useLoggedInStore } from "../../store";
 import { useQueryClient } from "@tanstack/react-query";
 
 import Countdown from "react-countdown";
+import { useForm } from "react-hook-form";
 
 const AuctionItem = () => {
   const client = useQueryClient();
+  const {
+    register,
+    handleSubmit,
+    resetField,
+    formState:{errors}
+  }=useForm()
   const { id } = useParams();
   const { data, isLoading } = AuctionByID(id);
   const newbid = CreateBid(client);
   const ItemBids = BidByID(id);
   const isLoggedIN = useLoggedInStore((state) => state.loggedIn);
   const userType = useLoggedInStore((state) => state.userType);
-
-  const CreateNewBid = (amount) => {
-    let data = {
-      amount: amount,
+  const BidAmountRef=useRef(0)
+  const CreateNewBid = (data) => {
+    let newdata = {
+      amount: data.amount,
       item: id,
     };
-    newbid.mutate(data);
+    newbid.mutate(newdata);
+    resetField('amount')
   };
   return (
     <>
@@ -69,17 +77,19 @@ const AuctionItem = () => {
                       <>
                         <input
                           type="number"
+                          ref={BidAmountRef}
+                          {...register('amount',{min:100})}
                           className="bg-blue-100 h-12 outline-none p-6 text-black"
                           placeholder="Enter amount"
                         />
                         <button
                           className="bg-blue-500 text-white px-6 py-3 rounded-md"
-                          onClick={() => CreateNewBid(10000)}
+                          onClick={handleSubmit(CreateNewBid)}
                         >
                           BID
                         </button>
                         <Countdown
-                          date={Date.now() + 90000000}
+                          date={new Date(data.time)}
                           // renderer={renderer}
                         />
                         ,
@@ -93,6 +103,7 @@ const AuctionItem = () => {
                     )}
                   </>
                 </div>
+                {errors.amount&&<span className="text-error">Min Bid Amount is 100</span>}
                 <div className="h-[250px] mx-auto overflow-auto p-1 m-4">
                   <table className="min-w-full bg-white border border-gray-300 shadow-md rounded-md overflow-auto">
                     <thead className="bg-slate-50">

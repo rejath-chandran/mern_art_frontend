@@ -43,6 +43,10 @@ import {
   GetAllComment,
   PostComment,
   GetProductbyAristSeller,
+  GetAllAuctionForSeller,
+  GetAllAuctionForSellerSold,
+  PostAccountDetails,
+  GetUserAccountDetailsByid
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -173,6 +177,18 @@ export function AllAuction() {
     queryFn: GetAllAuction,
   });
 }
+export function AllAuctionSeller() {
+  return useQuery({
+    queryKey: ["all-auction-seller"],
+    queryFn: GetAllAuctionForSeller,
+  });
+}
+export function AllAuctionSellerSold() {
+  return useQuery({
+    queryKey: ["all-auction-seller-sold"],
+    queryFn: GetAllAuctionForSellerSold,
+  });
+}
 export function AuctionByID(id) {
   return useQuery({
     queryKey: ["auction-id", id],
@@ -183,7 +199,7 @@ export function CreateAuction(client) {
   return useMutation({
     mutationFn: (data) => PostAuction(data),
     onSuccess: (res) => {
-      client.invalidateQueries({ queryKey: ["all-auction"] });
+      client.invalidateQueries({ queryKey: ["all-auction-seller"] });
     },
     onError: () => {},
   });
@@ -192,7 +208,7 @@ export function DeleteSellerAuction(client) {
   return useMutation({
     mutationFn: (data) => DeleteAuction(data),
     onSuccess: (res) => {
-      client.invalidateQueries({ queryKey: ["all-auction"] });
+      client.invalidateQueries({ queryKey: ["all-auction-seller"] });
     },
   });
 }
@@ -393,4 +409,15 @@ export function MakeCommentbyUser() {
   return useMutation({
     mutationFn: (data) => PostComment(data),
   });
+}
+export function UpdateAccountDetails(client) {
+  return useMutation({
+    mutationFn:(data)=>PostAccountDetails(data)
+  })
+}
+export function GetUserAcccountDetails() {
+  return useQuery({
+    queryKey:["user-account-details"],
+    queryFn:GetUserAccountDetailsByid
+  })
 }

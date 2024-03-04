@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { io } from "socket.io-client";
-
+import { useNavigate } from "react-router";
 function Notification({ toggleDropdown, isDropdownOpen, dropdownRef }) {
+  const nav=useNavigate()
   const [notifications, SetNotify] = useState([]);
 
   useEffect(() => {
@@ -52,7 +53,7 @@ function Notification({ toggleDropdown, isDropdownOpen, dropdownRef }) {
                 <div
                   key={notification.id}
                   className="cursor-pointer  p-2 border-4"
-                  onClick={() => console.log(notification.id)}
+                  onClick={() => nav(`/item/${notification.id}`)}
                 >
                   {console.log("hey", notification)}
                   <div className="text-sm text-black font-semibold">
