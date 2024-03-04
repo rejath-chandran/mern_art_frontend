@@ -22,7 +22,7 @@ function SearchBar() {
   const FinalSubmit = (e) => {
     e.preventDefault();
 
-    nav(`/category/${SearchRef.current.value}`);
+    nav(`/search/${SearchRef.current.value}`);
     SearchRef.current.value = "";
     close();
   };

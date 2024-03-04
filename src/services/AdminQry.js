@@ -47,6 +47,7 @@ import {
   GetAllAuctionForSellerSold,
   PostAccountDetails,
   GetUserAccountDetailsByid,
+  GetshopSearch,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -419,5 +420,11 @@ export function GetUserAcccountDetails() {
   return useQuery({
     queryKey: ["user-account-details"],
     queryFn: GetUserAccountDetailsByid,
+  });
+}
+export function GetUserSearchProducts(item) {
+  return useQuery({
+    queryKey: ["user-search-product",item],
+    queryFn: GetshopSearch,
   });
 }

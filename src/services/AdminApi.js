@@ -216,3 +216,7 @@ export const GetUserAccountDetailsByid = async ({ queryKey }) => {
   // const [_, id] = queryKey;
   return (await axioInstance.get(`api/account_details`, { headers })).data;
 };
+export const GetshopSearch = async ({ queryKey }) => {
+  const [_, item] = queryKey;
+  return (await axioInstance.get(`api/search/${item}`, { headers })).data;
+};

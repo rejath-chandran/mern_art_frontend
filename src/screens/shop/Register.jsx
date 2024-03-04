@@ -13,9 +13,9 @@ const Register = () => {
   const handleLogin = (data) => {
     // e.preventDefault();
     let UserData = {
-      name:data.name,
-      email:data.email,
-      password:data.password,
+      name: data.name,
+      email: data.email,
+      password: data.password,
     };
     Register.mutate(UserData);
   };

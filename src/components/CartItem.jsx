@@ -6,12 +6,12 @@ const CartItem = ({ item, onRemove, Checkout }) => {
         className="w-[200px] h-[100px] object-cover mb-8 rounded-md"
       />
       <div>
-        <h3 className="text-lg font-semibold">{item.name}</h3>
+        <h3 className="text-lg font-semibold"> {item.name}</h3>
         {Checkout ? (
           <></>
         ) : (
           <>
-            <p className="text-gray-600">{item.description}</p>
+            {/* <p className="text-gray-600">{item.description}</p> */}
           </>
         )}
       </div>

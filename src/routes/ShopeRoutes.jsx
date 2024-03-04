@@ -23,6 +23,7 @@ import AuthChecker from "../components/AuthChecker";
 import AboutUs from "../screens/shop/AboutUs";
 import ContactUs from "../screens/shop/ContactUs";
 import AnimatedPage from "../components/AnimatedPage";
+import SearchPage from "../screens/shop/SearchPage";
 const ShopeRoutes = () => {
   return (
     <>
@@ -43,6 +44,14 @@ const ShopeRoutes = () => {
             element={
               <AnimatedPage>
                 <Category />
+              </AnimatedPage>
+            }
+          />
+          <Route
+            path="search/:value"
+            element={
+              <AnimatedPage>
+                <SearchPage/>
               </AnimatedPage>
             }
           />
