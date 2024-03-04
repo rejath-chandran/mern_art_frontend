@@ -63,7 +63,7 @@ function ProductTable({ DeleteSubmit, EditSubmit, category_list }) {
     {
       accessorKey: "category",
       header: "category",
-      cell: (p) => <p>{p.getValue()}</p>,
+      cell: (p) => <p>{p.row.original.category.name}</p>,
     },
     {
       accessorKey: "price",

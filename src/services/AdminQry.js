@@ -46,7 +46,7 @@ import {
   GetAllAuctionForSeller,
   GetAllAuctionForSellerSold,
   PostAccountDetails,
-  GetUserAccountDetailsByid
+  GetUserAccountDetailsByid,
 } from "./AdminApi";
 
 export function AllCategory() {
@@ -412,12 +412,12 @@ export function MakeCommentbyUser() {
 }
 export function UpdateAccountDetails(client) {
   return useMutation({
-    mutationFn:(data)=>PostAccountDetails(data)
-  })
+    mutationFn: (data) => PostAccountDetails(data),
+  });
 }
 export function GetUserAcccountDetails() {
   return useQuery({
-    queryKey:["user-account-details"],
-    queryFn:GetUserAccountDetailsByid
-  })
+    queryKey: ["user-account-details"],
+    queryFn: GetUserAccountDetailsByid,
+  });
 }

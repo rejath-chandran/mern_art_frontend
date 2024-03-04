@@ -92,7 +92,8 @@ export const GetAllAuctionForSeller = async () => {
   return data;
 };
 export const GetAllAuctionForSellerSold = async () => {
-  let data = (await axioInstance.get("api/auction_seller_sold", { headers })).data;
+  let data = (await axioInstance.get("api/auction_seller_sold", { headers }))
+    .data;
   return data;
 };
 
@@ -206,7 +207,6 @@ export const GetAllComment = async ({ queryKey }) => {
 export const PostComment = async (data) => {
   return await axioInstance.post("api/make_comment", data, { headers });
 };
-
 
 export const PostAccountDetails = async (data) => {
   return await axioInstance.post("api/account_details", data, { headers });

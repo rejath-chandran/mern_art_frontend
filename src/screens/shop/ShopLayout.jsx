@@ -138,8 +138,10 @@ const ShopLayout = () => {
                     <span className="sr-only">Your Company</span>
                     {isLoading ? (
                       <>loading...</>
-                    ) : (
+                    ) : (<div className="flex">
                       <img className="h-8 w-auto" src={data.logo} alt="" />
+                      <span className="mx-3 text-3xl font-bold">{data.name}</span>
+                      </div>
                     )}
                   </Link>
                 </div>

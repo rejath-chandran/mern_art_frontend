@@ -10,12 +10,12 @@ const Register = () => {
   const notify = () => toast.warning("email already exits");
   const Register = RegisterUser(notify);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const handleLogin = (data) => {
+    // e.preventDefault();
     let UserData = {
-      name,
-      email,
-      password,
+      name:data.name,
+      email:data.email,
+      password:data.password,
     };
     Register.mutate(UserData);
   };

@@ -1,9 +1,8 @@
 import React from "react";
 import { AllAuctionSellerSold } from "../../services/AdminQry";
-import DataTable from "../../components/DataTable"
+import DataTable from "../../components/DataTable";
 function SoldAuction() {
-  const auction=AllAuctionSellerSold()
-
+  const auction = AllAuctionSellerSold();
 
   let columns = [
     {
@@ -47,18 +46,16 @@ function SoldAuction() {
       header: "WINNER",
       cell: (p) => <p>{p.getValue()}</p>,
     },
-    
-
-    
   ];
-  return <div>{
-    auction.isFetched&&<>
-    
-    
-    <DataTable columns={columns} data={auction.data}/>
-    </>
-    
-    }</div>;
+  return (
+    <div>
+      {auction.isFetched && (
+        <>
+          <DataTable columns={columns} data={auction.data} />
+        </>
+      )}
+    </div>
+  );
 }
 
 export default SoldAuction;

@@ -5,10 +5,10 @@ import { useNavigate } from "react-router";
 // import { motion } from "framer-motion"
 
 function SearchBar() {
-  const nav=useNavigate()
+  const nav = useNavigate();
   const { visible, close } = SearchStore();
   const dropdownRef = useRef();
-  const SearchRef=useRef('')
+  const SearchRef = useRef("");
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       close();
@@ -17,17 +17,15 @@ function SearchBar() {
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
-
-
   }, []);
 
-  const FinalSubmit=(e)=>{
-   e.preventDefault();
+  const FinalSubmit = (e) => {
+    e.preventDefault();
 
-   nav(`/category/${SearchRef.current.value}`)
-   SearchRef.current.value=''
-   close()
-  }
+    nav(`/category/${SearchRef.current.value}`);
+    SearchRef.current.value = "";
+    close();
+  };
   return (
     <div
       className={`${visible ? "" : "hidden"} absolute bg-white opacity-95 inset-0 z-40`}

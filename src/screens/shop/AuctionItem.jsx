@@ -13,22 +13,22 @@ const AuctionItem = () => {
     register,
     handleSubmit,
     resetField,
-    formState:{errors}
-  }=useForm()
+    formState: { errors },
+  } = useForm();
   const { id } = useParams();
   const { data, isLoading } = AuctionByID(id);
   const newbid = CreateBid(client);
   const ItemBids = BidByID(id);
   const isLoggedIN = useLoggedInStore((state) => state.loggedIn);
   const userType = useLoggedInStore((state) => state.userType);
-  const BidAmountRef=useRef(0)
+  const BidAmountRef = useRef(0);
   const CreateNewBid = (data) => {
     let newdata = {
       amount: data.amount,
       item: id,
     };
     newbid.mutate(newdata);
-    resetField('amount')
+    resetField("amount");
   };
   return (
     <>
@@ -78,7 +78,7 @@ const AuctionItem = () => {
                         <input
                           type="number"
                           ref={BidAmountRef}
-                          {...register('amount',{min:100})}
+                          {...register("amount", { min: 100 })}
                           className="bg-blue-100 h-12 outline-none p-6 text-black"
                           placeholder="Enter amount"
                         />
@@ -103,7 +103,9 @@ const AuctionItem = () => {
                     )}
                   </>
                 </div>
-                {errors.amount&&<span className="text-error">Min Bid Amount is 100</span>}
+                {errors.amount && (
+                  <span className="text-error">Min Bid Amount is 100</span>
+                )}
                 <div className="h-[250px] mx-auto overflow-auto p-1 m-4">
                   <table className="min-w-full bg-white border border-gray-300 shadow-md rounded-md overflow-auto">
                     <thead className="bg-slate-50">

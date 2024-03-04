@@ -62,9 +62,7 @@ const SellerProduct = () => {
   return (
     <div className=" bg-white h-[100%] p-6 relative">
       <Header name={"Add Products"} openModal={openModal} />
-      {isLoading ? (
-        <>loading</>
-      ) : (
+      {(
         <div className="bg-gray-800 rounded-md container text-white w-ful h-[83vh] w-[80vw]">
           <ProductTable
             DeleteSubmit={DeleteSubmit}

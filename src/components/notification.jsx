@@ -3,7 +3,7 @@ import { useState } from "react";
 import { io } from "socket.io-client";
 import { useNavigate } from "react-router";
 function Notification({ toggleDropdown, isDropdownOpen, dropdownRef }) {
-  const nav=useNavigate()
+  const nav = useNavigate();
   const [notifications, SetNotify] = useState([]);
 
   useEffect(() => {

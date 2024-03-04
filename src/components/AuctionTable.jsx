@@ -3,7 +3,11 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { AllAuction, AllAuctionSeller, DeleteSellerAuction } from "../services/AdminQry";
+import {
+  AllAuction,
+  AllAuctionSeller,
+  DeleteSellerAuction,
+} from "../services/AdminQry";
 import { useQueryClient } from "@tanstack/react-query";
 import Countdown from "react-countdown";
 import CountDownTimer from "./CountDownTimer";
