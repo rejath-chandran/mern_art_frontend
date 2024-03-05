@@ -19,18 +19,17 @@ const Checkout = () => {
   const {
     register,
     handleSubmit,
-    formState:{errors}
-    }=useForm()
+    formState: { errors },
+  } = useForm();
 
   const CheckOutHandler = (data) => {
-
     let newdata = {
       name: data.name,
       email: data.email,
       phone: data.phone,
       adress: data.address,
       cart: cart,
-    }
+    };
 
     Order.mutate(newdata);
   };
@@ -50,7 +49,7 @@ const Checkout = () => {
                   Name
                 </label>
                 <input
-                {...register('name',{required:true})}
+                  {...register("name", { required: true })}
                   type="text"
                   id="name"
                   name="name"
@@ -59,7 +58,7 @@ const Checkout = () => {
                   required
                 />
               </div>
-              {errors.name&&<span className="text-error">name is need</span>}
+              {errors.name && <span className="text-error">name is need</span>}
               <div className="mb-4">
                 <label
                   htmlFor="name"
@@ -68,7 +67,7 @@ const Checkout = () => {
                   Email
                 </label>
                 <input
-                {...register('email',{required:true})}
+                  {...register("email", { required: true })}
                   type="email"
                   id="email"
                   name="email"
@@ -77,7 +76,9 @@ const Checkout = () => {
                   required
                 />
               </div>
-              {errors.email&&<span className="text-error">email is needed</span>}
+              {errors.email && (
+                <span className="text-error">email is needed</span>
+              )}
               <div className="mb-4">
                 <label
                   htmlFor="name"
@@ -86,9 +87,14 @@ const Checkout = () => {
                   Phone
                 </label>
                 <input
-                {...register('phone',{required:true,maxLength: 10,minLength: 10,pattern:{
-                  value: /^(0|[1-9]\d*)(\.\d+)?$/
-               },})}
+                  {...register("phone", {
+                    required: true,
+                    maxLength: 10,
+                    minLength: 10,
+                    pattern: {
+                      value: /^(0|[1-9]\d*)(\.\d+)?$/,
+                    },
+                  })}
                   type="tel"
                   id="phone"
                   name="phone"
@@ -97,7 +103,9 @@ const Checkout = () => {
                   required
                 />
               </div>
-              {errors.phone&&<span className="text-error">enter valid phone number</span>}
+              {errors.phone && (
+                <span className="text-error">enter valid phone number</span>
+              )}
               <div className="mb-4">
                 <label
                   htmlFor="address"
@@ -106,7 +114,7 @@ const Checkout = () => {
                   Address
                 </label>
                 <input
-                {...register('address',{required:true})}
+                  {...register("address", { required: true })}
                   type="text"
                   id="address"
                   name="address"
@@ -115,7 +123,9 @@ const Checkout = () => {
                   required
                 />
               </div>
-              {errors.address&&<span className="text-error">address needed</span>}
+              {errors.address && (
+                <span className="text-error">address needed</span>
+              )}
               <div className="mb-4">
                 <button
                   type="submit"

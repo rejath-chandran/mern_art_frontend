@@ -53,11 +53,11 @@ function Notification({ toggleDropdown, isDropdownOpen, dropdownRef }) {
                 <div
                   key={notification.id}
                   className="cursor-pointer  p-2 border-4"
-                  onClick={() =>{
-                    if(notification.type=="product"){
-                      return nav(`/item/${notification.id}`)
-                    }else{
-                      return nav(`/auction/${notification.id}`)
+                  onClick={() => {
+                    if (notification.type == "product") {
+                      return nav(`/item/${notification.id}`);
+                    } else {
+                      return nav(`/auction/${notification.id}`);
                     }
                   }}
                 >

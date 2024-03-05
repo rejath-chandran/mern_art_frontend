@@ -1,11 +1,16 @@
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const EditModal = ({ submit, openModal, details, selections }) => {
   const image = useRef("");
   const [url, SetUrl] = useState(details.image || "");
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const uploadimage = () => {
     const data = new FormData();
@@ -28,6 +33,15 @@ const EditModal = ({ submit, openModal, details, selections }) => {
       <div role="alert" class="container mx-auto w-11/12 md:w-2/3 max-w-lg">
         <form
           onSubmit={handleSubmit((d) => {
+            console.log(d);
+            if (url == "") {
+              toast.error("image missing");
+              return;
+            }
+            if (!Number.isInteger(parseInt(d.price))) {
+              toast.error("price missing");
+              return;
+            }
             submit({ ...d, url });
             openModal(false);
           })}
@@ -83,7 +97,7 @@ const EditModal = ({ submit, openModal, details, selections }) => {
                   {i}:
                 </label>
                 <select
-                  {...register(i)}
+                  {...register(i, { required: true })}
                   class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
                 >
                   {selections?.map((o) => {
@@ -108,7 +122,7 @@ const EditModal = ({ submit, openModal, details, selections }) => {
                   defaultValue={details[i]}
                   type="text"
                   class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-                  {...register(i)}
+                  {...register(i, { required: true })}
                 />
               </>
             ),

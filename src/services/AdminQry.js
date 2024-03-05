@@ -120,7 +120,7 @@ export function CreateProduct(client) {
   return useMutation({
     mutationFn: (data) => PostProduct(data),
     onSuccess: (res) => {
-      client.invalidateQueries({ queryKey: ["all-product"] });
+      client.invalidateQueries({ queryKey: ["all-product-artist-seller"] });
     },
     onError: () => {},
   });
@@ -156,7 +156,7 @@ export function UpdateProduct(client) {
   return useMutation({
     mutationFn: (data) => PutProduct(data),
     onSuccess: (res) => {
-      client.invalidateQueries({ queryKey: ["all-product"] });
+      client.invalidateQueries({ queryKey: ["all-product-artist-seller"] });
     },
     onError: () => {},
   });
@@ -165,7 +165,7 @@ export function RemoveProduct(client) {
   return useMutation({
     mutationFn: (data) => DeleteProduct(data),
     onSuccess: (res) => {
-      client.invalidateQueries({ queryKey: ["all-product"] });
+      client.invalidateQueries({ queryKey: ["all-product-artist-seller"] });
     },
     onError: () => {},
   });
@@ -360,9 +360,9 @@ export function WalletRequest(client) {
       toast.success("request sucessfull");
       client.invalidateQueries({ queryKey: ["user-wallet-request"] });
     },
-    onError:() => {
+    onError: () => {
       toast.error("request amount greater than wallet balance");
-    }
+    },
   });
 }
 export function AdminWalletChangeStatus(client) {
